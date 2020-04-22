@@ -1,10 +1,25 @@
 import React from 'react';
+import {
+  Route,
+  Switch
+} from 'react-router-dom'
 
-function App() {
-  return (
-    <div>
-    </div>
-  );
-}
+import HomePage from './pages/home/Home.page'
+import SignUpPage from './pages/signup/SignUp.page'
+
+import AppContainer from './App.styles'
+
+const App = () => (
+  <AppContainer>
+    <Switch>
+      <Route path="/signup">
+        <SignUpPage />
+      </Route>
+      <Route path="/">
+        <HomePage />
+      </Route>
+    </Switch>
+  </AppContainer>
+)
 
 export default App;
