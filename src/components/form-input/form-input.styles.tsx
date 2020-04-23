@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-const FormInputContainer = styled.div`
+interface FormInputContainerProps {
+    error: string
+}
+
+const FormInputContainer = styled.div<FormInputContainerProps>`
     display: flex;
     flex-direction: column;
     margin: .5rem 0 0;
@@ -8,6 +12,11 @@ const FormInputContainer = styled.div`
     input {
         padding: .5rem 1rem;
         display: block;
+        border: ${props => props.error ? '1px solid #e74c3c' : '1px solid #ccc' };
+    }
+
+    input:focus {
+        border: 1px solid #2980b9;
     }
 
     .error {
