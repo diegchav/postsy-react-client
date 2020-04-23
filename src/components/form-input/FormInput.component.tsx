@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FormInputContainer from './form-input.styles'
+import FormInputContainer from './FormInput.styles'
 
 interface FormInputProps extends React.HTMLProps<HTMLInputElement> {
     error: string

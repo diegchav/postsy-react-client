@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 import axios from 'axios'
 import isEmail from 'validator/lib/isEmail'
 
-import FormInput from '../form-input/form-input.component'
+import FormInput from '../form-input/FormInput.component'
 
 import { API_URL, API_AUTH_PATH, HTTP_OK, HTTP_BAD_REQUEST } from '../../constants'
 

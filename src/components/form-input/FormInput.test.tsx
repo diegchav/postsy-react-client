@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import FormInput from './form-input.component'
+import FormInput from './FormInput.component'
 
 describe('<FormInput />', () => {
     it('renders an span element  if a non-empty error prop is passed', () => {
