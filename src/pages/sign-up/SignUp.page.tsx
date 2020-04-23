@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SignUpForm from '../../components/sign-in-form/SignUpForm.component'
+import SignUpForm from '../../components/sign-up-form/SignUpForm.component'
 
 import SignUpPageContainer from './SignUp.styles'
 

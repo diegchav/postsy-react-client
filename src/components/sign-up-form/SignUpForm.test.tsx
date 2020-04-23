@@ -9,7 +9,7 @@ import {
 
 import SignUpForm from './SignUpForm.component'
 
-import { HTTP_BAD_REQUEST } from '../../../src/constants'
+import { HTTP_BAD_REQUEST } from '../../constants'
 
 import axios from 'axios'
 
