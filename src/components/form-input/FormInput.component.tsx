@@ -11,10 +11,7 @@ const FormInput = ({ error, ...otherProps }: FormInputProps) => {
     return (
         <FormInputContainer error={error}>
             <input {...otherProps} />
-            {error
-                ? <span className="error">{error}</span>
-                : null
-            }
+            {error && <span className="error">{error}</span>}
         </FormInputContainer>
     )
 }

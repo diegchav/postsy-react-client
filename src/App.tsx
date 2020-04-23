@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 
 import HomePage from './pages/home/Home.page'
-import SignUpPage from './pages/signup/SignUp.page'
+import SignUpPage from './pages/sign-up/SignUp.page'
 
 import AppContainer from './App.styles'
 
