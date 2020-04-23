@@ -80,7 +80,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
             password
         }
         try {
-            const res = await (await axios.post(authUrl + '/signup', payload))
+            const res = await axios.post(authUrl + '/signup', payload)
             const resData = res.data
             if (resData.status === HTTP_OK) {
                 history.push('/')
