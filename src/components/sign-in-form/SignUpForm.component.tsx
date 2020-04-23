@@ -9,8 +9,6 @@ import { API_URL, API_AUTH_PATH, HTTP_OK, HTTP_BAD_REQUEST } from '../../constan
 
 import SignUpFormContainer from './SignUpForm.styles'
 
-
-
 const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
     const authUrl = API_URL + API_AUTH_PATH
 

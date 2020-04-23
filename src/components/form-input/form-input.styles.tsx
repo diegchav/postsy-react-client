@@ -8,6 +8,7 @@ const FormInputContainer = styled.div<FormInputContainerProps>`
     display: flex;
     flex-direction: column;
     margin: .5rem 0 0;
+    height: 60px;
 
     input {
         padding: .5rem 1rem;
@@ -23,7 +24,6 @@ const FormInputContainer = styled.div<FormInputContainerProps>`
         color: #e74c3c;
         font-size: .75rem;
         margin-top: .5rem;
-        height: 1rem;
     }
 `
 
