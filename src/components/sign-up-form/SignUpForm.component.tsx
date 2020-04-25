@@ -20,14 +20,16 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
             'username': '',
             'email': '',
             'password': ''
-        }
+        },
+        isSigningUp: false
     })
 
     const {
         username,
         email,
         password,
-        errors
+        errors,
+        isSigningUp
     } = state
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +71,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
                 errors: validationErrors
             })
         } else {
+            setState({ ...state, isSigningUp: true })
             signUp(username, email, password)
         }
     }
@@ -101,7 +104,8 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
                     })
                     setState({
                         ...state,
-                        errors: validationErrors
+                        errors: validationErrors,
+                        // isSigningUp: false
                     })
                 }
             } else {
@@ -136,7 +140,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
                     value={password}
                     error={errors.password}
                     onChange={handleChange} />
-                <button type="submit">Sign Up</button>
+                <button type="submit" disabled={isSigningUp}>Sign Up</button>
             </form>
         </SignUpFormContainer>
     )

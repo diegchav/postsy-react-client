@@ -26,5 +26,10 @@ export default styled.div`
             margin-top: 1rem;
             cursor: pointer;
         }
+
+        button:disabled {
+            opacity: .75;
+            cursor: not-allowed;
+        }
     }
 `
