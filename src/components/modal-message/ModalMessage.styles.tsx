@@ -23,12 +23,13 @@ const ModalMessageContainer = styled.div<ModalMessageContainerProps>`
     }};
     padding: 1rem 0;
     text-align: center;
-    margin: 0 auto;
-    position: relative;
+    position: fixed;
     top: 1rem;
+    left: 50%;
     border: none;
     border-radius: 5px;
     color: #fff;
+    transform: translate(-50%);
 
     .dismiss {
         position: absolute;
