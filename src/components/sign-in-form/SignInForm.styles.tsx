@@ -32,4 +32,17 @@ export default styled.div`
             cursor: not-allowed;
         }
     }
+
+    .link {
+        font-size: .9rem;
+        text-align: right;
+        margin-top: 1rem;
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: #2980b9;
+        }
+    }
 `

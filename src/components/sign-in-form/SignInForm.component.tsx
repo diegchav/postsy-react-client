@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
 
 import FormInput from '../form-input/FormInput.component'
@@ -117,6 +117,7 @@ const SignInForm: React.FC<RouteComponentProps> = ({ history }) => {
                 onChange={handleChange} />
             <button type="submit" disabled={isSigningIn}>Sign In</button>
         </form>
+        <span className="link">Don't have an account? <Link to="/signup">Sign up</Link></span>
     </SignInFormContainer>
     )
 }

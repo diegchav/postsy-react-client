@@ -23,13 +23,26 @@ export default styled.div`
             border: none;
             border-radius: 20px;
             font-size: 1rem;
-            margin-top: 1rem;
+            margin-top: .5rem;
             cursor: pointer;
         }
 
         button:disabled {
             opacity: .75;
             cursor: not-allowed;
+        }
+    }
+
+    .link {
+        font-size: .9rem;
+        text-align: right;
+        margin-top: 1rem;
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: #2980b9;
         }
     }
 `
