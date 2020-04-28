@@ -9,7 +9,7 @@ import {
 
 import SignUpForm from './SignUpForm.component'
 
-import { HTTP_BAD_REQUEST } from '../../constants'
+import { HTTP_BAD_REQUEST, VALIDATION_ERROR } from '../../constants'
 
 
 jest.mock('axios')
@@ -72,15 +72,13 @@ describe('<SignUpForm />', () => {
         )
 
         // Mock axios post request
-        axiosMock.post.mockRejectedValueOnce({
-            response: {
-                data: {
-                    status: HTTP_BAD_REQUEST,
-                    errors: [{
-                        username: 'Username is already taken'
-                    }]
-                },
-                status: HTTP_BAD_REQUEST
+        axiosMock.post.mockResolvedValueOnce({
+            data: {
+                status: HTTP_BAD_REQUEST,
+                message: VALIDATION_ERROR,
+                errors: [{
+                    username: 'Username is already taken'
+                }]
             }
         })
 
@@ -130,15 +128,13 @@ describe('<SignUpForm />', () => {
         )
 
         // Mock axios post request
-        axiosMock.post.mockRejectedValueOnce({
-            response: {
-                data: {
-                    status: HTTP_BAD_REQUEST,
-                    errors: [{
-                        email: 'Email is already taken'
-                    }]
-                },
-                status: HTTP_BAD_REQUEST
+        axiosMock.post.mockResolvedValueOnce({
+            data: {
+                status: HTTP_BAD_REQUEST,
+                message: VALIDATION_ERROR,
+                errors: [{
+                    email: 'Email is already taken'
+                }]
             }
         })
 
@@ -188,15 +184,13 @@ describe('<SignUpForm />', () => {
         )
 
         // Mock axios response
-        axiosMock.post.mockRejectedValueOnce({
-            response: {
-                data: {
-                    status: HTTP_BAD_REQUEST,
-                    errors: [{
-                        username: 'Username is required'
-                    }]
-                },
-                status: HTTP_BAD_REQUEST
+        axiosMock.post.mockResolvedValueOnce({
+            data: {
+                status: HTTP_BAD_REQUEST,
+                message: VALIDATION_ERROR,
+                errors: [{
+                    username: 'Username is required'
+                }]
             }
         })
 

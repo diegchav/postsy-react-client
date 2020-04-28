@@ -6,6 +6,12 @@ import handleResponse from '../helpers/handle-response'
 export default class AuthenticationService {
     private static authUrl = API_URL + API_AUTH_PATH
 
+    static signUp = (username: string, email: string, password: string) => {
+        const payload = { username, email, password }
+        return axios.post(AuthenticationService.authUrl + '/signup', payload)
+            .then(handleResponse)
+    }
+
     static signIn = (email: string, password: string) => {
         const payload = { email, password }
         return axios.post(AuthenticationService.authUrl + '/signin', payload)

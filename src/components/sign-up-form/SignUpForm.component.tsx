@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import axios from 'axios'
 import isEmail from 'validator/lib/isEmail'
 
 import FormInput from '../form-input/FormInput.component'
 
-import { API_URL, API_AUTH_PATH, HTTP_OK, HTTP_BAD_REQUEST } from '../../constants'
+import AuthenticationService from '../../services/authentication.service'
+
+import { FlashMessageType, FlashMessageContext } from '../../providers/FlashMessage.provider'
 
 import SignUpFormContainer from './SignUpForm.styles'
 
 const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
-    const authUrl = API_URL + API_AUTH_PATH
-
     const [state, setState] = useState({
         username: '',
         email: '',
@@ -31,6 +30,8 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
         errors,
         isSigningUp
     } = state
+
+    const { changeFlashMessage } = useContext(FlashMessageContext)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -76,40 +77,19 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
         }
     }
 
-    const signUp = async (username: String, email: String, password: String) => {
-        const payload = {
-            username,
-            email,
-            password
-        }
+    const signUp = async (username: string, email: string, password: string) => {
         try {
-            const res = await axios.post(authUrl + '/signup', payload)
-            const resData = res.data
-            if (resData.status === HTTP_OK) {
-                history.push('/signin')
-            }
+            await AuthenticationService.signUp(username, email, password)
+            changeFlashMessage('Successfully signed up', FlashMessageType.Success)
+            history.push('/signin')
         } catch (err) {
-            const errData = err.response.data
-            if (errData.status === HTTP_BAD_REQUEST) {
-                if (errData.errors) {
-                    const validationErrors = {
-                        'username': '',
-                        'email': '',
-                        'password': ''
-                    }
-                    const errorsArray = errData.errors.map((e: Object) => Object.entries(e)[0]) || []
-                    errorsArray.forEach((e: Array<string>) => {
-                        const [key, value] = e
-                        validationErrors[key as keyof typeof validationErrors] = value
-                    })
-                    setState({
-                        ...state,
-                        errors: validationErrors,
-                        isSigningUp: false
-                    })
-                }
-            } else {
-                console.error(errData)
+            if (err.errors) {
+                const { errors } = err
+                setState({
+                    ...state,
+                    errors,
+                    isSigningUp: false
+                })
             }
         }
     }
