@@ -1,5 +1,6 @@
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
+import axios from 'axios'
 import {
     render,
     fireEvent,
@@ -10,8 +11,6 @@ import SignUpForm from './SignUpForm.component'
 
 import { HTTP_BAD_REQUEST } from '../../constants'
 
-import axios from 'axios'
-import { act } from 'react-dom/test-utils'
 
 jest.mock('axios')
 

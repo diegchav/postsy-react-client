@@ -86,7 +86,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
             const res = await axios.post(authUrl + '/signup', payload)
             const resData = res.data
             if (resData.status === HTTP_OK) {
-                history.push('/')
+                history.push('/signin')
             }
         } catch (err) {
             const errData = err.response.data
@@ -105,7 +105,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
                     setState({
                         ...state,
                         errors: validationErrors,
-                        // isSigningUp: false
+                        isSigningUp: false
                     })
                 }
             } else {
