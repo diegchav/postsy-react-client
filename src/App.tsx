@@ -12,16 +12,16 @@ import ModalMessage from './components/modal-message/ModalMessage.component'
 
 import PrivateRoute from './hoc/PrivateRoute'
 
-import { ErrorContext } from './providers/Error.provider'
+import { FlashMessageContext } from './providers/FlashMessage.provider'
 
 import AppContainer from './App.styles'
 
 const App = () => {
-  const { error } = useContext(ErrorContext)
+  const { message, type } = useContext(FlashMessageContext)
 
   return (
     <AppContainer>
-      <ModalMessage error={error} />
+      <ModalMessage message={message} type={type} />
       <Switch>
         <Route path="/signup">
           <SignUpPage />

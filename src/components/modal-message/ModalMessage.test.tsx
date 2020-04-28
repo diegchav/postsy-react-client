@@ -9,7 +9,7 @@ describe('<ModalMessage />', () => {
     it('renders a modal message when a non-empty error is passed', () => {
         const error = 'Some error'
         const { getByRole, getByText } = render(
-            <ModalMessage error={error} />
+            <ModalMessage message={error} />
         )
         expect(getByRole('button')).toBeInTheDocument()
         expect(getByText(error)).toBeInTheDocument()
@@ -18,7 +18,7 @@ describe('<ModalMessage />', () => {
     it('render an empty component when an empty error is passed', () => {
         const error = ''
         const { queryByRole } = render(
-            <ModalMessage error={error} />
+            <ModalMessage message={error} />
         )
         expect(queryByRole('button')).not.toBeInTheDocument()
     })
@@ -26,13 +26,13 @@ describe('<ModalMessage />', () => {
     it('dismisses the modal when the close button is clicked', async () => {
         let error = 'Some error'
         const { queryByRole, rerender } = render(
-            <ModalMessage error={error} />
+            <ModalMessage message={error} />
         )
         expect(queryByRole('button')).toBeInTheDocument()
 
         // Simulate close button
         error = ''
-        rerender(<ModalMessage error={error} />)
+        rerender(<ModalMessage message={error} />)
         expect(queryByRole('button')).not.toBeInTheDocument()
     })
 })

@@ -7,18 +7,18 @@ import App from './App';
 
 import './index.css';
 
-import ErrorProvider from './providers/Error.provider'
+import FlashMessageProvider from './providers/FlashMessage.provider'
 
 // Configure axios defaults
 axios.defaults.validateStatus = (status) => status >= 200 && status < 500
 
 ReactDOM.render(
-  <ErrorProvider>
+  <FlashMessageProvider>
     <React.StrictMode>
       <Router>
         <App />
       </Router>
     </React.StrictMode>
-  </ErrorProvider>,
+  </FlashMessageProvider>,
   document.getElementById('root')
 );

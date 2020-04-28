@@ -6,7 +6,7 @@ import FormInput from '../form-input/FormInput.component'
 
 import AuthenticationService from '../../services/authentication.service'
 
-import { ErrorContext } from '../../providers/Error.provider'
+import { FlashMessageType, FlashMessageContext } from '../../providers/FlashMessage.provider'
 
 import SignInFormContainer from './SignInForm.styles'
 
@@ -28,7 +28,7 @@ const SignInForm: React.FC<RouteComponentProps> = ({ history }) => {
         isSigningIn
     } = state
 
-    const { changeError } = useContext(ErrorContext)
+    const { changeFlashMessage } = useContext(FlashMessageContext)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -81,7 +81,7 @@ const SignInForm: React.FC<RouteComponentProps> = ({ history }) => {
                     isSigningIn: false
                 })
             } else if (err.error) {
-                changeError(err.error)
+                changeFlashMessage(err.error, FlashMessageType.Error)
                 setState({
                     ...state,
                     email: '',

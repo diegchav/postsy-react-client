@@ -3,7 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withStyles } from '@material-ui/core/styles'
 
-import { ErrorContext } from '../../providers/Error.provider'
+import { FlashMessageType, FlashMessageContext } from '../../providers/FlashMessage.provider'
 
 import ModalMessageContainer from './ModalMessage.styles'
 
@@ -14,19 +14,19 @@ const CustomIconButton = withStyles({
 })(IconButton)
 
 interface ModalMessageProps {
-    error: string
+    message: string,
+    type?: FlashMessageType
 }
 
-export default ({ error }: ModalMessageProps) => {
-    const { changeError } = useContext(ErrorContext)
-
+export default ({ message, type = FlashMessageType.Success }: ModalMessageProps) => {
+    const { changeFlashMessage } = useContext(FlashMessageContext)
     return (
-        error !== ''
-        ? <ModalMessageContainer>
-            <CustomIconButton className="dismiss" onClick={() => changeError('')}>
+        message !== ''
+        ? <ModalMessageContainer modalType={type}>
+            <CustomIconButton className="dismiss" onClick={() => changeFlashMessage('')}>
                 <CloseIcon style={{ fontSize: 15 }} />
             </CustomIconButton>
-            {error}
+            {message}
         </ModalMessageContainer>
         : null
     )
