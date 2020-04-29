@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import {
-  Route,
   Switch
 } from 'react-router-dom'
 
@@ -10,6 +9,7 @@ import SignInPage from './pages/sign-in/SignIn.page'
 
 import ModalMessage from './components/modal-message/ModalMessage.component'
 
+import PublicRoute from './hoc/PublicRoute'
 import PrivateRoute from './hoc/PrivateRoute'
 
 import { FlashMessageContext } from './providers/FlashMessage.provider'
@@ -23,12 +23,12 @@ const App = () => {
     <AppContainer>
       <ModalMessage message={message} type={type} />
       <Switch>
-        <Route path="/signup">
+        <PublicRoute path="/signup">
           <SignUpPage />
-        </Route>
-        <Route path="/signin">
+        </PublicRoute>
+        <PublicRoute path="/signin">
           <SignInPage />
-        </Route>
+        </PublicRoute>
         <PrivateRoute path="/">
           <HomePage />
         </PrivateRoute>
