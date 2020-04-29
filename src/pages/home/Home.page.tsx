@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import PostService from '../../services/post.service'
 
+import PostList from '../../components/post-list/PostList.component'
+
 const HomePage = () => {
     const [posts, setPosts] = useState([])
 
@@ -18,11 +20,7 @@ const HomePage = () => {
     }, [])
 
     return (
-        <div>
-            {posts.map((post: any) => (
-                <p key={post._id}>{post.text}</p>
-            ))}
-        </div>
+        <PostList posts={posts} />
     )
 }
 
