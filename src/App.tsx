@@ -7,6 +7,7 @@ import HomePage from './pages/home/Home.page'
 import SignUpPage from './pages/sign-up/SignUp.page'
 import SignInPage from './pages/sign-in/SignIn.page'
 
+import NavBar from './components/nav-bar/NavBar.component'
 import ModalMessage from './components/modal-message/ModalMessage.component'
 
 import PublicRoute from './hoc/PublicRoute'
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <AppContainer>
       <ModalMessage message={message} type={type} />
+      <NavBar />
       <Switch>
         <PublicRoute path="/signup">
           <SignUpPage />
