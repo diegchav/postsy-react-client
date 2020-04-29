@@ -16,8 +16,8 @@ export default class AuthenticationService {
         const payload = { email, password }
         return axios.post(AuthenticationService.authUrl + '/signin', payload)
             .then(handleResponse)
-            .then(user => {
-                localStorage.setItem('user', JSON.stringify(user))
+            .then(res => {
+                localStorage.setItem('user', JSON.stringify(res))
             })
     }
 

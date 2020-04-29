@@ -10,8 +10,7 @@ import {
 export default (response: AxiosResponse) => {
     const resData = response.data
     if (resData.status === HTTP_OK) {
-        const { user, token } = resData
-        return { user, token }
+        return resData
     } else if (resData.status === HTTP_BAD_REQUEST) {
         const { message } = resData
         if (message === AUTHENTICATION_ERROR) {
