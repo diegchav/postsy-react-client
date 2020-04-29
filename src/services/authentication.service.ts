@@ -21,8 +21,12 @@ export default class AuthenticationService {
             })
     }
 
+    static logOut = () => {
+        localStorage.removeItem('user')
+    }
+
     static getCurrentUser = () => {
-        const user = localStorage.getItem('user')
+        const user = JSON.parse(localStorage.getItem('user')!)
         return user
     }
 }
