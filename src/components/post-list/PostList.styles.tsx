@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
 const PostListContainer = styled.div`
-    width: 85%;
-    margin: 0 auto;
+    width: 80%;
+    overflow-y: scroll;
+    margin: 1rem 0;
 `
 
 export default PostListContainer

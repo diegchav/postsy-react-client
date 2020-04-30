@@ -13,4 +13,10 @@ export default class PostService {
             .then(handleResponse)
             .then(res => res.posts)
     }
+
+    static create = (text: string) => {
+        const payload = { text }
+        return axios.post(PostService.postsUrl, payload, { headers: authHeader() })
+            .then(handleResponse)
+    }
 }
