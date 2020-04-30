@@ -14,6 +14,7 @@ const NavItemContainerStyles = css`
 export const NavBarContainer = styled.div`
     width: 100%;
     height: 5%;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
 `
