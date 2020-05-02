@@ -7,10 +7,15 @@ import DeletePostModal from '../../components/delete-post-modal/DeletePostModal.
 import CreatePostButton from '../../components/create-post-button/CreatePostButton.component'
 import PostList from '../../components/post-list/PostList.component'
 
+import withSpinner from '../../hoc/with-spinner'
+
 import HomePageContainer from './Home.styles'
+
+const PostListWithSpinner = withSpinner(PostList)
 
 const HomePage = () => {
     const [posts, setPosts] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [postToDelete, setPostToDelete] = useState('')
@@ -20,6 +25,7 @@ const HomePage = () => {
             try {
                 const allPosts = await PostService.getAll()
                 setPosts(allPosts)
+                setIsLoading(false)
             } catch (err) {
                 console.error(err)
             }
@@ -85,7 +91,7 @@ const HomePage = () => {
         }
         <HomePageContainer>
             <CreatePostButton onClick={handleOpenCreatePostModal} />
-            <PostList posts={posts} onDeletePost={handleOpenDeletePostModal} />
+            <PostListWithSpinner isLoading={isLoading} posts={posts} onDeletePost={handleOpenDeletePostModal} />
         </HomePageContainer>
         </>
     )
