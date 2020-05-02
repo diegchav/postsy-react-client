@@ -25,7 +25,7 @@ const CreatePostModal = ({ onClose, onCreate }: CreatePostModalProps) => {
                 <h4>Create Post</h4>
                 <textarea placeholder="Enter post text here" value={postText} onChange={handleChange} />
                 <div className="actions">
-                    <button className="cancel" onClick={() => onClose()}>Cancel</button>
+                    <button onClick={() => onClose()}>Cancel</button>
                     <button className="create" onClick={handleCreate}>Create</button>
                 </div>
             </div>

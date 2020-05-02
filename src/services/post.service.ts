@@ -19,4 +19,8 @@ export default class PostService {
         return axios.post(PostService.postsUrl, payload, { headers: authHeader() })
             .then(handleResponse)
     }
+
+    static delete = (id: string) => {
+        return axios.post(`${PostService.postsUrl}/${id}`, null, { headers: authHeader() })
+    }
 }

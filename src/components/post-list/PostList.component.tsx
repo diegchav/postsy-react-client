@@ -5,12 +5,13 @@ import Post from '../post/Post.component'
 import PostListContainer from './PostList.styles'
 
 interface PostListProps {
-    posts: Array<any>
+    posts: Array<any>,
+    onDeletePost: Function
 }
 
-const PostList = ({ posts }: PostListProps) => (
+const PostList = ({ posts, onDeletePost }: PostListProps) => (
     <PostListContainer>
-        {posts.map((post: any) => <Post key={post._id} post={post} />)}
+        {posts.map((post: any) => <Post key={post._id} post={post} onDelete={onDeletePost} />)}
     </PostListContainer>
 )
 
