@@ -8,6 +8,8 @@ interface PostProps {
 }
 
 const Post = ({ post, onDelete }: PostProps) => {
+    const imageNameIndex = post.imageUrl.split('/') + 1
+    const imageName = post.imageUrl.substr(imageNameIndex)
     const createdAt = 
         `${new Date(post.createdAt).toLocaleTimeString()} ${new Date(post.createdAt).toLocaleDateString()}`
 
@@ -21,6 +23,7 @@ const Post = ({ post, onDelete }: PostProps) => {
             <p className="author">{post.user.username}</p>
             <p className="timestamp">{createdAt}</p>
             <p className="text">{post.text}</p>
+            {imageName && <img src={post.imageUrl} alt={imageName} />}
             <button onClick={handleDelete}>Delete</button>
         </PostContainer>
     )

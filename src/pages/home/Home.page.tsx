@@ -41,9 +41,9 @@ const HomePage = () => {
         setIsCreateModalOpen(false)
     }
 
-    const handleCreatePost = async (postText: string) => {
+    const handleCreatePost = async (postText: string, postImageFile?: File) => {
         try {
-            await PostService.create(postText)
+            await PostService.create(postText, postImageFile)
             const allPosts = await PostService.getAll()
             setPosts(allPosts)
             setIsCreateModalOpen(false)

@@ -14,9 +14,11 @@ export default class PostService {
             .then(res => res.posts)
     }
 
-    static create = (text: string) => {
-        const payload = { text }
-        return axios.post(PostService.postsUrl, payload, { headers: authHeader() })
+    static create = (text: string, imageFile?: File) => {
+        const data = new FormData()
+        data.append('text', text)
+        if (imageFile) data.append('imageFile', imageFile)
+        return axios.post(PostService.postsUrl, data, { headers: authHeader() })
             .then(handleResponse)
     }
 

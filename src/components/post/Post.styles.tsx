@@ -23,6 +23,10 @@ const PostContainer = styled.div`
         margin-top: 1rem;
     }
 
+    img {
+        margin-top: 1rem;
+    }
+
     button {
         margin-top: 1rem;
         background-color: #c0392b;

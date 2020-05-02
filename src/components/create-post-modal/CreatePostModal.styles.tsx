@@ -25,6 +25,15 @@ const CreatePostModalContainer = styled.div`
             padding: .5rem;            
         }
 
+        input[type="file"] {
+            margin-top: 1rem;
+        }
+
+        img {
+            max-width: 100%;
+            margin: 1rem auto 0;
+        }
+
         .actions {
             display: flex;
             justify-content: end;
