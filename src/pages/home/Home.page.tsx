@@ -66,7 +66,7 @@ const HomePage = () => {
         try {
             await PostService.delete(postToDelete)
             setPostToDelete('')
-            const allPosts = await PostService.getAll()
+            const allPosts = posts.filter((post: any) => post._id !== postToDelete)
             setPosts(allPosts)
             setIsDeleteModalOpen(false)
         } catch (err) {
