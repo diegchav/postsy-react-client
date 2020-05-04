@@ -23,6 +23,6 @@ export default class PostService {
     }
 
     static delete = (id: string) => {
-        return axios.post(`${PostService.postsUrl}/${id}`, null, { headers: authHeader() })
+        return axios.delete(`${PostService.postsUrl}/${id}`, { headers: authHeader() })
     }
 }
