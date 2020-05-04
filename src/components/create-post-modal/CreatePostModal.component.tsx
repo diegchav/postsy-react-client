@@ -37,7 +37,7 @@ const CreatePostModal = ({ onClose, onCreate }: CreatePostModalProps) => {
                 <h4>Create Post</h4>
                 <textarea placeholder="Enter post text here" value={postText} onChange={handleTextChange} />
                 <input type="file" onChange={handleFileChange} />
-                <img src={imageUrl} alt="post" />
+                {imageUrl && <img src={imageUrl} alt="post" />}
                 <div className="actions">
                     <button onClick={() => onClose()}>Cancel</button>
                     <button className="create" onClick={handleCreate}>Create</button>
