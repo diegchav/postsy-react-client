@@ -4,19 +4,20 @@ import styled, { css } from 'styled-components'
 const NavItemContainerStyles = css`
     padding: 0 1rem;
     cursor: pointer;
-    color: #000;
+    color: #636e72;
 
     :hover {
-        opacity: .5;
+        opacity: .85;
     }
 `
 
 export const NavBarContainer = styled.div`
     width: 100%;
-    height: 5%;
+    height: 10%;
     padding: 0 1rem;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid #636e72;
 `
 
 export const NavItemsContainer = styled.div`
