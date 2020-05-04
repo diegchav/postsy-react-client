@@ -64,7 +64,6 @@ const HomePage = () => {
 
     const handleDeletePost = async () => {
         try {
-            console.log(postToDelete)
             await PostService.delete(postToDelete)
             setPostToDelete('')
             const allPosts = await PostService.getAll()
