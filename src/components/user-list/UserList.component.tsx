@@ -12,7 +12,7 @@ const UserList = ({ users }: UserListProps) => {
     return (
         <UserListContainer>
         {
-            users.map(user => <User user={user} />)
+            users.map(user => <User key={user._id} user={user} />)
         }
         </UserListContainer>
     )
