@@ -8,8 +8,7 @@ interface UserListProps {
     users: Array<any>
 }
 
-const UserList = ({ users }: UserListProps) => {
-    return (
+const UserList = ({ users }: UserListProps) => {return (
         <UserListContainer>
         {
             users.map(user => <User key={user._id} user={user} />)
