@@ -19,11 +19,10 @@ const axiosMock = axios as jest.Mocked<typeof axios>
 /**
  * Mock data
  */
-const userValidUsername = 'test'
+const userValidName = 'Test'
 const userValidEmail = 'test@example.com'
 const userValidPassword = 'password'
-const userInvalidUsernameMinLength = 'te'
-const userInvalidUsernameMaxLength = 'testtesttesttesttest'
+const userInvalidNameMaxLength = new Array(121).fill('A').join('')
 const userInvalidEmail = 'test'
 const userInvalidPasswordMinLength = 'test'
 
@@ -32,71 +31,25 @@ describe('<SignUpForm />', () => {
         jest.clearAllMocks()
     })
 
-    it('renders an error span element if username is not provided', () => {
+    it('renders an error span element if name is not provided', () => {
         const { getByRole, getByText } = render(
             <MemoryRouter>
                 <SignUpForm />
             </MemoryRouter>
         )
         fireEvent.click(getByRole('button'))
-        expect(getByText('Username is required')).toBeInTheDocument()
+        expect(getByText('Name is required')).toBeInTheDocument()
     })
 
-    it('renders an error span element if username length is less than required', () => {
+    it('renders an error span element if name length is greater than required', () => {
         const { getByPlaceholderText, getByRole, getByText } = render(
             <MemoryRouter>
                 <SignUpForm />
             </MemoryRouter>
         )
-        fireEvent.change(getByPlaceholderText('Username'), { target: { value: userInvalidUsernameMinLength } })
+        fireEvent.change(getByPlaceholderText('Name'), { target: { value: userInvalidNameMaxLength } })
         fireEvent.click(getByRole('button'))
-        expect(getByText('Username must be at least 3 characters')).toBeInTheDocument()
-    })
-
-    it('renders an error span element if username length is greater than required', () => {
-        const { getByPlaceholderText, getByRole, getByText } = render(
-            <MemoryRouter>
-                <SignUpForm />
-            </MemoryRouter>
-        )
-        fireEvent.change(getByPlaceholderText('Username'), { target: { value: userInvalidUsernameMaxLength } })
-        fireEvent.click(getByRole('button'))
-        expect(getByText('Username must be less than 16 characters')).toBeInTheDocument()
-    })
-
-    it('renders an error span element if username already exists', async () => {
-        const { getByPlaceholderText, queryByText, getByRole } = render(
-            <MemoryRouter>
-                <SignUpForm />
-            </MemoryRouter>
-        )
-
-        // Mock axios post request
-        axiosMock.post.mockResolvedValueOnce({
-            data: {
-                status: HTTP_BAD_REQUEST,
-                message: VALIDATION_ERROR,
-                errors: [{
-                    username: 'Username is already taken'
-                }]
-            }
-        })
-
-        // Fill input fields
-        fireEvent.change(getByPlaceholderText('Username'), { target: { value: userValidUsername } })
-        fireEvent.change(getByPlaceholderText('Email'), { target: { value: userValidEmail } })
-        fireEvent.change(getByPlaceholderText('Password'), { target: { value: userValidPassword } })
-
-        // Span error should not be rendered at this point
-        expect(queryByText('Username is already taken')).not.toBeInTheDocument()
-
-        // Submit form
-        fireEvent.click(getByRole('button'))
-
-        expect(axiosMock.post).toHaveBeenCalled()
-        await waitFor(() => {
-            expect(queryByText('Username is already taken')).toBeInTheDocument()
-        })
+        expect(getByText('Name must be at most 120 characters')).toBeInTheDocument()
     })
 
     it('renders an error span element if email is not provided', () => {
@@ -139,7 +92,7 @@ describe('<SignUpForm />', () => {
         })
 
         // Fill input fields
-        fireEvent.change(getByPlaceholderText('Username'), { target: { value: userValidUsername } })
+        fireEvent.change(getByPlaceholderText('Name'), { target: { value: userValidName } })
         fireEvent.change(getByPlaceholderText('Email'), { target: { value: userValidEmail } })
         fireEvent.change(getByPlaceholderText('Password'), { target: { value: userValidPassword } })
 
@@ -189,7 +142,7 @@ describe('<SignUpForm />', () => {
                 status: HTTP_BAD_REQUEST,
                 message: VALIDATION_ERROR,
                 errors: [{
-                    username: 'Username is required'
+                    name: 'Name is required'
                 }]
             }
         })
@@ -198,7 +151,7 @@ describe('<SignUpForm />', () => {
         expect(submitButton).not.toHaveAttribute('disabled')
 
         // Submit form
-        fireEvent.change(getByPlaceholderText('Username'), { target: { value: userValidUsername } })
+        fireEvent.change(getByPlaceholderText('Name'), { target: { value: userValidName } })
         fireEvent.change(getByPlaceholderText('Email'), { target: { value: userValidEmail } })
         fireEvent.change(getByPlaceholderText('Password'), { target: { value: userValidPassword } })
 

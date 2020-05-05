@@ -12,11 +12,11 @@ import SignUpFormContainer from './SignUpForm.styles'
 
 const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
     const [state, setState] = useState({
-        username: '',
+        name: '',
         email: '',
         password: '',
         errors: {
-            'username': '',
+            'name': '',
             'email': '',
             'password': ''
         },
@@ -24,7 +24,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
     })
 
     const {
-        username,
+        name,
         email,
         password,
         errors,
@@ -43,13 +43,12 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
 
     const validate = () => {
         const validationErrors = {
-            'username': '',
+            'name': '',
             'email': '',
             'password': ''
         }
-        if (!username) validationErrors['username'] = 'Username is required'
-        else if (username.length < 3) validationErrors['username'] = 'Username must be at least 3 characters'
-        else if (username.length > 16) validationErrors['username'] = 'Username must be less than 16 characters'
+        if (!name) validationErrors['name'] = 'Name is required'
+        else if (name.length > 120) validationErrors['name'] = 'Name must be at most 120 characters'
 
         if (!email) validationErrors['email'] = 'Email is required'
         else if (!isEmail(email)) validationErrors['email'] = 'Email is not valid'
@@ -73,13 +72,13 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
             })
         } else {
             setState({ ...state, isSigningUp: true })
-            signUp(username, email, password)
+            signUp(name, email, password)
         }
     }
 
-    const signUp = async (username: string, email: string, password: string) => {
+    const signUp = async (name: string, email: string, password: string) => {
         try {
-            await AuthenticationService.signUp(username, email, password)
+            await AuthenticationService.signUp(name, email, password)
             changeFlashMessage('Successfully signed up', FlashMessageType.Success)
             history.push('/signin')
         } catch (err) {
@@ -100,11 +99,11 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
             <form onSubmit={handleSubmit}>
                 <FormInput
                     type="text"
-                    name="username"
-                    placeholder="Username"
+                    name="name"
+                    placeholder="Name"
                     autoFocus
-                    value={username}
-                    error={errors.username}
+                    value={name}
+                    error={errors.name}
                     onChange={handleChange} />
                 <FormInput
                     type="text"
