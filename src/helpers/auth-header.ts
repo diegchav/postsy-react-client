@@ -1,7 +1,7 @@
-import AuthenticationService from '../services/authentication.service'
+import AuthService from '../services/auth.service'
 
 export default () => {
-    const currentUser = AuthenticationService.getCurrentUser()
+    const currentUser = AuthService.getCurrentUser()
     if (currentUser && currentUser.token) {
         return { Authorization: `Bearer ${currentUser.token}`}
     }

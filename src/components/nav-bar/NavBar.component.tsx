@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AuthenticationService from '../../services/authentication.service'
+import AuthService from '../../services/auth.service'
 
 import {
     NavBarContainer,
@@ -11,7 +11,7 @@ import {
 } from './NavBar.styles'
 
 const Header = () => {
-    const currentUser = AuthenticationService.getCurrentUser()
+    const currentUser = AuthService.getCurrentUser()
     return (
         <NavBarContainer>
             <NavLogoContainer to="/">Home</NavLogoContainer>

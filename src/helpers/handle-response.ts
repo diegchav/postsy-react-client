@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 
-import AuthenticationService from '../services/authentication.service'
+import AuthService from '../services/auth.service'
 
 import {
     HTTP_BAD_REQUEST,
@@ -30,7 +30,7 @@ export default (response: AxiosResponse) => {
         }
     } else if (resData.status === HTTP_UNAUTHORIZED) {
         // Log out and redirect to signin in case jwt token is no longer valid
-        AuthenticationService.logOut()
+        AuthService.logOut()
         window.location.reload()
     }
 }

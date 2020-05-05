@@ -4,7 +4,7 @@ import isEmail from 'validator/lib/isEmail'
 
 import FormInput from '../form-input/FormInput.component'
 
-import AuthenticationService from '../../services/authentication.service'
+import AuthService from '../../services/auth.service'
 
 import { FlashMessageType, FlashMessageContext } from '../../providers/FlashMessage.provider'
 
@@ -78,7 +78,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
 
     const signUp = async (name: string, email: string, password: string) => {
         try {
-            await AuthenticationService.signUp(name, email, password)
+            await AuthService.signUp(name, email, password)
             changeFlashMessage('Successfully signed up', FlashMessageType.Success)
             history.push('/signin')
         } catch (err) {
