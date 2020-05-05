@@ -11,7 +11,7 @@ import SearchPageContainer from './Search.styles'
 const UserListWithSpinner = withSpinner(UserList)
 
 const SearchPage = () => {
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState<any[]>([])
     const [isLoadingUsers, setIsLoadingUsers] = useState(true)
 
     useEffect(() => {
@@ -27,9 +27,27 @@ const SearchPage = () => {
         getUsers()
     }, [])
 
+    const handleFollowUser = async (userId: string) => {
+        try {
+            await UserService.follow(userId)
+            const updatedUsers = users.map((user: any) => {
+                if (user._id === userId) {
+                    return {
+                        ...user,
+                        following: !user.following
+                    }
+                }
+                return user
+            })
+            setUsers(updatedUsers)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <SearchPageContainer>
-            <UserListWithSpinner isLoading={isLoadingUsers} users={users} />
+            <UserListWithSpinner isLoading={isLoadingUsers} users={users} onFollowUser={handleFollowUser} />
         </SearchPageContainer>
     )
 }

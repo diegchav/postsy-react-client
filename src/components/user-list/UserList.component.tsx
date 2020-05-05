@@ -5,13 +5,15 @@ import User from '../user/User.component'
 import UserListContainer from './UserList.styles'
 
 interface UserListProps {
-    users: Array<any>
+    users: Array<any>,
+    onFollowUser: Function
 }
 
-const UserList = ({ users }: UserListProps) => {return (
+const UserList = ({ users, onFollowUser }: UserListProps) => {
+    return (
         <UserListContainer>
         {
-            users.map(user => <User key={user._id} user={user} />)
+            users.map(user => <User key={user._id} user={user} onFollow={onFollowUser} />)
         }
         </UserListContainer>
     )
