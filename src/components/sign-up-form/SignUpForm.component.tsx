@@ -72,7 +72,7 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
             })
         } else {
             setState({ ...state, isSigningUp: true })
-            signUp(name, email, password)
+            signUp(name.trim(), email.trim(), password.trim())
         }
     }
 

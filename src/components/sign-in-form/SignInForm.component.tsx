@@ -64,7 +64,7 @@ const SignInForm: React.FC<RouteComponentProps> = ({ history }) => {
             })
         } else {
             setState({ ...state, isSigningIn: true })
-            signIn(email, password)
+            signIn(email.trim(), password.trim())
         }
     }
 
