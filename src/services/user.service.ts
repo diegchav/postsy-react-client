@@ -19,6 +19,11 @@ class UserService {
         return axios.post(`${UserService.usersUrl}/follow/${userId}`, null, { headers: authHeader() })
             .then(handleResponse)
     }
+
+    static unfollow = (userId: string) => {
+        return axios.post(`${UserService.usersUrl}/unfollow/${userId}`, null, { headers: authHeader() })
+            .then(handleResponse)
+    }
 }
 
 export default UserService

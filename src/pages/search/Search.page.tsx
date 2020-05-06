@@ -45,9 +45,27 @@ const SearchPage = () => {
         }
     }
 
+    const handleUnfollowUser = async (userId: string) => {
+        try {
+            await UserService.unfollow(userId)
+            const updatedUsers = users.map((user: any) => {
+                if (user._id === userId) {
+                    return {
+                        ...user,
+                        following: !user.following
+                    }
+                }
+                return user
+            })
+            setUsers(updatedUsers)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <SearchPageContainer>
-            <UserListWithSpinner isLoading={isLoadingUsers} users={users} onFollowUser={handleFollowUser} />
+            <UserListWithSpinner isLoading={isLoadingUsers} users={users} onFollowUser={handleFollowUser} onUnfollowUser={handleUnfollowUser} />
         </SearchPageContainer>
     )
 }
