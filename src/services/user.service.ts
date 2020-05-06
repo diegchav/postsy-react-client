@@ -15,6 +15,12 @@ class UserService {
 
     }
 
+    static getUser = (id: string) => {
+        return axios.get(`${UserService.usersUrl}/${id}`, { headers: authHeader() })
+            .then(handleResponse)
+            .then(res => res.user)
+    }
+
     static follow = (userId: string) => {
         return axios.post(`${UserService.usersUrl}/follow/${userId}`, null, { headers: authHeader() })
             .then(handleResponse)

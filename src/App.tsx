@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom'
 
 import HomePage from './pages/home/Home.page'
+import UserProfilePage from './pages/user-profile/UserProfile.page'
 import SearchPage from './pages/search/Search.page'
 import SignUpPage from './pages/sign-up/SignUp.page'
 import SignInPage from './pages/sign-in/SignIn.page'
@@ -26,6 +27,9 @@ const App = () => {
       <ModalMessage message={message} type={type} />
       <NavBar />
       <Switch>
+        <PrivateRoute path="/profile/:userId">
+          <UserProfilePage />
+        </PrivateRoute>
         <PrivateRoute path="/search">
           <SearchPage />
         </PrivateRoute>

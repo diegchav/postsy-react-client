@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import UserContainer from './User.styles'
 
@@ -11,7 +12,7 @@ const User = ({ user: { _id, name, following }, onFollow }: UserProps) => {
     return (
         <UserContainer>
             <div className="user">
-                {name}
+                <Link to={`/profile/${_id}`}>{name}</Link>
             </div>
             <button
                 className={following ? 'unfollow' : 'follow'}
