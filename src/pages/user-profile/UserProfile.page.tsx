@@ -3,9 +3,13 @@ import { useParams } from 'react-router-dom'
 
 import List from '../../components/list/List.component'
 
+import withSpinner from '../../hoc/with-spinner'
+
 import UserService from '../../services/user.service'
 
 import UserProfilePageContainer, { ItemContainer } from './UserProfile.styles'
+
+const UserProfileWithSpinner = withSpinner(UserProfilePageContainer)
 
 const FollowingItem = ({ item: { name } }: any) => (
     <ItemContainer>
@@ -29,6 +33,7 @@ const UserProfilePage = () => {
     const [user, setUser] = useState('')
     const [userFollowing, setUserFollowing] = useState<string[]>([])
     const [userFollowers, setUserFollowers] = useState<string[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
     const { userId } = useParams()
 
@@ -40,6 +45,7 @@ const UserProfilePage = () => {
                 setUser(name)
                 setUserFollowing(following)
                 setUserFollowers(followers)
+                setIsLoading(false)
             } catch (err) {
                 console.error(err)
             }
@@ -49,7 +55,7 @@ const UserProfilePage = () => {
     }, [userId])
 
     return (
-        <UserProfilePageContainer>
+        <UserProfileWithSpinner isLoading={isLoading}>
             <div className="user-information">
                 <h1>User Information</h1>
                 <div className="user-details">
@@ -74,7 +80,7 @@ const UserProfilePage = () => {
                     ItemComponent={FollowerItem}
                     NoItemsComponent={NoItemsComponent} />
             </div>
-        </UserProfilePageContainer>
+        </UserProfileWithSpinner>
     )
 }
 
