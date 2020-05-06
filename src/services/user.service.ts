@@ -12,7 +12,6 @@ class UserService {
         return axios.get(UserService.usersUrl, { headers: authHeader() })
             .then(handleResponse)
             .then(res => res.users)
-
     }
 
     static getUser = (id: string) => {

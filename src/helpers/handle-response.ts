@@ -32,5 +32,8 @@ export default (response: AxiosResponse) => {
         // Log out and redirect to signin in case jwt token is no longer valid
         AuthService.logOut()
         window.location.reload()
+
+        const errorMessage = resData.errors[0].error
+        return Promise.reject(errorMessage)
     }
 }
