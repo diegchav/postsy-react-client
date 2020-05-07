@@ -30,9 +30,10 @@ const AccountSettingsContainer = styled.div`
                 margin-right: 1rem;
             }
 
-            input {
+            input,
+            textarea {
                 width: 50%;
-                padding: 0 .5rem;
+                padding: .25rem .5rem;
             }
         }
 

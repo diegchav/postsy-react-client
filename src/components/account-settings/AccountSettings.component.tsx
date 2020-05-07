@@ -10,14 +10,15 @@ interface AccountSettingsProps {
     user: any
 }
 
-const AccountSettings = ({ user: { _id, name } }: AccountSettingsProps) => {
+const AccountSettings = ({ user: { _id, name, bio } }: AccountSettingsProps) => {
     const [state, setState] = useState({
-        name
+        name,
+        bio
     })
 
     const { changeFlashMessage } = useContext(FlashMessageContext)
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
         setState({
             ...state,
@@ -26,9 +27,9 @@ const AccountSettings = ({ user: { _id, name } }: AccountSettingsProps) => {
     }
 
     const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        const { name } = state
+        const { name, bio } = state
         try {
-            await UserService.updateUser(_id, name)
+            await UserService.updateUser(_id, name, bio)
             changeFlashMessage('Successfully saved settings', FlashMessageType.Success)
         } catch (err) {
             console.error(err)
@@ -48,6 +49,14 @@ const AccountSettings = ({ user: { _id, name } }: AccountSettingsProps) => {
                         value={state.name}
                         onChange={handleChange}
                         autoFocus />
+                </div>
+                <div className="input-form">
+                    <label>Bio:</label>
+                    <textarea
+                        rows={5}
+                        name="bio"
+                        value={state.bio}
+                        onChange={handleChange} />
                 </div>
                 <button onClick={handleSave}>Save</button>
             </div>

@@ -20,8 +20,8 @@ class UserService {
             .then(res => res.user)
     }
 
-    static updateUser = (id: string, name: string) => {
-        const payload = { name }
+    static updateUser = (id: string, name: string, bio: string) => {
+        const payload = { name, bio }
         return axios.put(`${UserService.usersUrl}`, payload, { headers: authHeader() })
             .then(handleResponse)
     }

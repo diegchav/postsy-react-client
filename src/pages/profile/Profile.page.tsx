@@ -36,7 +36,7 @@ const ProfilePage = () => {
                 const { user: { _id } } = await AuthService.getCurrentUser()
                 const _user = await UserService.getUser(_id)
                 const { following, followers } = _user
-                setCurrentUser({ _id: _user._id, name: _user.name })
+                setCurrentUser({ _id: _user._id, name: _user.name, bio: _user.bio })
                 setUserFollowing(following)
                 setUserFollowers(followers)
                 setIsLoading(false)
