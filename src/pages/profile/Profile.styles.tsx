@@ -15,7 +15,7 @@ const ProfilePageContainer = styled.div`
 
     .following-and-followers {
         display: flex;
-        margin-top: 2rem;
+        margin-top: 2.5rem;
         justify-content: space-between;
     }
 `

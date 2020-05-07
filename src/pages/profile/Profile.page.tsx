@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+import AccountSettings from '../../components/account-settings/AccountSettings.component'
 import List from '../../components/list/List.component'
 
 import withSpinner from '../../hoc/with-spinner'
@@ -24,6 +25,7 @@ const NoItemsComponent = () => (
 )
 
 const ProfilePage = () => {
+    const [currentUser, setCurrentUser] = useState({})
     const [userFollowing, setUserFollowing] = useState<any[]>([])
     const [userFollowers, setUserFollowers] = useState<any[]>([])
     const [isLoading, setIsLoading] = useState(true)
@@ -34,6 +36,7 @@ const ProfilePage = () => {
                 const { user: { _id } } = await AuthService.getCurrentUser()
                 const _user = await UserService.getUser(_id)
                 const { following, followers } = _user
+                setCurrentUser({ _id: _user._id, name: _user.name })
                 setUserFollowing(following)
                 setUserFollowers(followers)
                 setIsLoading(false)
@@ -46,6 +49,7 @@ const ProfilePage = () => {
 
     return (
         <ProfileWithSpinner isLoading={isLoading}>
+            <AccountSettings user={currentUser} />
             <div className="following-and-followers">
                 <List
                     width="48%"

@@ -20,6 +20,12 @@ class UserService {
             .then(res => res.user)
     }
 
+    static updateUser = (id: string, name: string) => {
+        const payload = { name }
+        return axios.put(`${UserService.usersUrl}`, payload, { headers: authHeader() })
+            .then(handleResponse)
+    }
+
     static follow = (userId: string) => {
         return axios.post(`${UserService.usersUrl}/follow/${userId}`, null, { headers: authHeader() })
             .then(handleResponse)
