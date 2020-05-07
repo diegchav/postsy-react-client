@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 
 import List from '../../components/list/List.component'
 
 import withSpinner from '../../hoc/with-spinner'
 
+import AuthService from '../../services/auth.service'
 import UserService from '../../services/user.service'
 
-import UserProfilePageContainer, { ItemContainer } from './UserProfile.styles'
+import ProfilePageContainer, { ItemContainer } from './Profile.styles'
 
-const UserProfileWithSpinner = withSpinner(UserProfilePageContainer)
+const ProfileWithSpinner = withSpinner(ProfilePageContainer)
 
 const ItemComponent = ({ item: { name } }: any) => (
     <ItemContainer>
@@ -23,20 +23,17 @@ const NoItemsComponent = () => (
     </ItemContainer>
 )
 
-const UserProfilePage = () => {
-    const [user, setUser] = useState('')
-    const [userFollowing, setUserFollowing] = useState<string[]>([])
-    const [userFollowers, setUserFollowers] = useState<string[]>([])
+const ProfilePage = () => {
+    const [userFollowing, setUserFollowing] = useState<any[]>([])
+    const [userFollowers, setUserFollowers] = useState<any[]>([])
     const [isLoading, setIsLoading] = useState(true)
-
-    const { userId } = useParams()
 
     useEffect(() => {
         const getUser = async () => {
             try {
-                const user = await UserService.getUser(userId || '')
-                const { name, following, followers } = user
-                setUser(name)
+                const { user: { _id } } = await AuthService.getCurrentUser()
+                const _user = await UserService.getUser(_id)
+                const { following, followers } = _user
                 setUserFollowing(following)
                 setUserFollowers(followers)
                 setIsLoading(false)
@@ -44,22 +41,14 @@ const UserProfilePage = () => {
                 console.error(err)
             }
         }
-
         getUser()
-    }, [userId])
+    }, [])
 
     return (
-        <UserProfileWithSpinner isLoading={isLoading}>
-            <div className="user-information">
-                <h1>User Information</h1>
-                <div className="user-details">
-                    {user}
-                </div>
-            </div>
+        <ProfileWithSpinner isLoading={isLoading}>
             <div className="following-and-followers">
                 <List
                     width="48%"
-                    height="90%"
                     title="Following"
                     items={userFollowing}
                     itemKey="_id"
@@ -67,15 +56,14 @@ const UserProfilePage = () => {
                     NoItemsComponent={NoItemsComponent} />
                 <List
                     width="48%"
-                    height="90%"
                     title="Followers"
                     items={userFollowers}
                     itemKey="_id"
                     ItemComponent={ItemComponent}
                     NoItemsComponent={NoItemsComponent} />
             </div>
-        </UserProfileWithSpinner>
+        </ProfileWithSpinner>
     )
 }
 
-export default UserProfilePage
+export default ProfilePage

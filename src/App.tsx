@@ -4,10 +4,11 @@ import {
 } from 'react-router-dom'
 
 import HomePage from './pages/home/Home.page'
-import UserProfilePage from './pages/user-profile/UserProfile.page'
-import SearchPage from './pages/search/Search.page'
 import SignUpPage from './pages/sign-up/SignUp.page'
 import SignInPage from './pages/sign-in/SignIn.page'
+import SearchPage from './pages/search/Search.page'
+import ProfilePage from './pages/profile/Profile.page'
+import UserProfilePage from './pages/user-profile/UserProfile.page'
 
 import NavBar from './components/nav-bar/NavBar.component'
 import ModalMessage from './components/modal-message/ModalMessage.component'
@@ -27,20 +28,23 @@ const App = () => {
       <ModalMessage message={message} type={type} />
       <NavBar />
       <Switch>
-        <PrivateRoute path="/profile/:userId">
-          <UserProfilePage />
+        <PrivateRoute path="/" exact>
+          <HomePage />
         </PrivateRoute>
-        <PrivateRoute path="/search">
-          <SearchPage />
-        </PrivateRoute>
-        <PublicRoute path="/signup">
+        <PublicRoute path="/signup" exact>
           <SignUpPage />
         </PublicRoute>
-        <PublicRoute path="/signin">
+        <PublicRoute path="/signin" exact>
           <SignInPage />
         </PublicRoute>
-        <PrivateRoute path="/">
-          <HomePage />
+        <PrivateRoute path="/search" exact>
+          <SearchPage />
+        </PrivateRoute>
+        <PrivateRoute path="/profile" exact>
+          <ProfilePage />
+        </PrivateRoute>
+        <PrivateRoute path="/profile/:userId" exact>
+          <UserProfilePage />
         </PrivateRoute>
       </Switch>
     </AppContainer>

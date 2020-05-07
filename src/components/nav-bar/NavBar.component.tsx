@@ -16,6 +16,7 @@ const Header = () => {
         <NavBarContainer>
             <NavLogoContainer to="/">Home</NavLogoContainer>
             <NavLinkContainer to="/search">Search</NavLinkContainer>
+            <NavLinkContainer to="/profile">Profile</NavLinkContainer>
             <NavItemsContainer>
                 {
                 currentUser
