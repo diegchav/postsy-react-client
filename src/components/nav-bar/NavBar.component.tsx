@@ -15,11 +15,17 @@ const Header = () => {
     return (
         <NavBarContainer>
             <NavLogoContainer to="/">Home</NavLogoContainer>
-            <NavLinkContainer to="/search">Search</NavLinkContainer>
-            <NavLinkContainer to="/profile">Profile</NavLinkContainer>
+            {currentUser
+                ? (
+                <>
+                <NavLinkContainer to="/search">Search</NavLinkContainer>
+                <NavLinkContainer to="/profile">Profile</NavLinkContainer>
+                </>
+                )
+                : null
+            }
             <NavItemsContainer>
-                {
-                currentUser
+                {currentUser
                     ? <NavItemContainer>Sign Out</NavItemContainer>
                     : <NavLinkContainer to="/signin">Sign In</NavLinkContainer>
                 }
