@@ -20,10 +20,15 @@ const Post = ({ post, onDelete }: PostProps) => {
 
     return (
         <PostContainer>
-            <p className="author">{post.user.username}</p>
-            <p className="timestamp">{createdAt}</p>
-            <p className="text">{post.text}</p>
-            {imageName && <img src={post.imageUrl} alt={imageName} />}
+            <div className="user-details">
+                <img className="avatar" src={post.user.avatar} alt="avatar" />
+                <div className="user">
+                    <p className="author">{post.user.name}</p>
+                    <p className="timestamp">{createdAt}</p>
+                </div>
+            </div>
+            <p className="post-text">{post.text}</p>
+            {imageName && <img className="post-image" src={post.imageUrl} alt={imageName} />}
             <button onClick={handleDelete}>Delete</button>
         </PostContainer>
     )

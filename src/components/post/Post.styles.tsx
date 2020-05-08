@@ -8,22 +8,34 @@ const PostContainer = styled.div`
     display: flex;
     flex-direction: column;
 
-    .author {
-        font-weight: bolder;
+    .user-details {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+            width: 48px;
+            margin-right: 1rem;
+        }
+
+        .user {
+            .author {
+                font-weight: bolder;
+            }
+
+            .timestamp {
+                font-size: .7rem;
+                margin-top: .25rem;
+                opacity: .75;
+            }
+        }
     }
 
-    .timestamp {
-        font-size: .7rem;
-        margin-top: .25rem;
-        opacity: .75;
-    }
-
-    .text {
+    .post-text {
         font-weight: lighter;
         margin-top: 1rem;
     }
 
-    img {
+    .post-image {
         margin-top: 1rem;
     }
 
