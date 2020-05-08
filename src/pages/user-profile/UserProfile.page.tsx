@@ -24,7 +24,10 @@ const NoItemsComponent = () => (
 )
 
 const UserProfilePage = () => {
-    const [user, setUser] = useState('')
+    const [user, setUser] = useState({
+        name: '',
+        bio: ''
+    })
     const [userFollowing, setUserFollowing] = useState<string[]>([])
     const [userFollowers, setUserFollowers] = useState<string[]>([])
     const [isLoading, setIsLoading] = useState(true)
@@ -35,8 +38,11 @@ const UserProfilePage = () => {
         const getUser = async () => {
             try {
                 const user = await UserService.getUser(userId || '')
-                const { name, following, followers } = user
-                setUser(name)
+                const { name, bio, following, followers } = user
+                setUser({
+                    name,
+                    bio
+                })
                 setUserFollowing(following)
                 setUserFollowers(followers)
                 setIsLoading(false)
@@ -53,7 +59,11 @@ const UserProfilePage = () => {
             <div className="user-information">
                 <h1>User Information</h1>
                 <div className="user-details">
-                    {user}
+                    <p className="name">{user.name}</p>
+                    {user.bio
+                        ? <p className="bio">{user.bio}</p>
+                        : <p className="no-bio">No bio</p>
+                    }
                 </div>
             </div>
             <div className="following-and-followers">

@@ -17,6 +17,16 @@ const UserProfilePageContainer = styled.div`
         background-color: #fff;
         margin-top: 1rem;
         padding: 1rem .5rem;
+
+        .bio,
+        .no-bio {
+            font-size: .95rem;
+            margin-top: .5rem;
+        }
+
+        .no-bio {
+            font-style: italic;
+        }
     }
 
     .following-and-followers {
