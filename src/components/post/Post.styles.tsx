@@ -23,7 +23,7 @@ const PostContainer = styled.div`
             }
 
             .timestamp {
-                font-size: .7rem;
+                font-size: .8rem;
                 margin-top: .25rem;
                 opacity: .75;
             }
