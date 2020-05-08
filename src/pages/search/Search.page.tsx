@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import UserList from '../../components/user-list/UserList.component'
+import SearchList from '../../components/search-list/SearchList.component'
 
 import withSpinner from '../../hoc/with-spinner'
 
@@ -8,7 +8,7 @@ import UserService from '../../services/user.service'
 
 import SearchPageContainer from './Search.styles'
 
-const UserListWithSpinner = withSpinner(UserList)
+const SearchListWithSpinner = withSpinner(SearchList)
 
 const SearchPage = () => {
     const [users, setUsers] = useState<any[]>([])
@@ -65,7 +65,11 @@ const SearchPage = () => {
 
     return (
         <SearchPageContainer>
-            <UserListWithSpinner isLoading={isLoadingUsers} users={users} onFollowUser={handleFollowUser} onUnfollowUser={handleUnfollowUser} />
+            <SearchListWithSpinner
+                isLoading={isLoadingUsers}
+                users={users}
+                onFollowUser={handleFollowUser}
+                onUnfollowUser={handleUnfollowUser} />
         </SearchPageContainer>
     )
 }
