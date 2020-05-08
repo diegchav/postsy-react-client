@@ -18,16 +18,27 @@ const AccountSettingsContainer = styled.div`
             margin: 1rem 0;
         }
 
+        .avatar {
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+
+            img {
+                width: 48px;
+            }
+        }
+
         .input-form {
             display: flex;
-            width: 60%;
+            width: 100%;
             margin: 0 auto;
 
             label {
-                width: 50%;
                 font-weight: bolder;
                 text-align: right;
                 margin-right: 1rem;
+                width: 100px;
             }
 
             input,

@@ -10,7 +10,7 @@ interface AccountSettingsProps {
     user: any
 }
 
-const AccountSettings = ({ user: { _id, name, bio } }: AccountSettingsProps) => {
+const AccountSettings = ({ user: { _id, name, bio, avatar } }: AccountSettingsProps) => {
     const [state, setState] = useState({
         name,
         bio
@@ -40,6 +40,9 @@ const AccountSettings = ({ user: { _id, name, bio } }: AccountSettingsProps) => 
         <AccountSettingsContainer>
             <h1>Account Settings</h1>
             <div className="form">
+                <div className="avatar">
+                    <img src={avatar} alt="avatar" />
+                </div>
                 <div className="input-form">
                     <label>Full Name:</label>
                     <input
