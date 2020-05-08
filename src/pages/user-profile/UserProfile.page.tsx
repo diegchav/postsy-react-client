@@ -11,9 +11,13 @@ import UserProfilePageContainer, { ItemContainer } from './UserProfile.styles'
 
 const UserProfileWithSpinner = withSpinner(UserProfilePageContainer)
 
-const ItemComponent = ({ item: { name } }: any) => (
+const ItemComponent = ({ item: { name, bio } }: any) => (
     <ItemContainer>
-        <p>{name}</p>
+        <p className="name">{name}</p>
+        {bio
+            ? <p className="bio">{bio}</p>
+            : <p className="no-bio">No bio</p>
+        }
     </ItemContainer>
 )
 

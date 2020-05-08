@@ -5,6 +5,19 @@ export const ItemContainer = styled.div`
     height: 100px;
     margin: .5rem 0;
     padding: 1rem .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .bio,
+    .no-bio {
+        font-size: .9rem;
+        margin-top: .5rem;
+    }
+
+    .no-bio {
+        font-style: italic;
+    }
 `
 
 const ProfilePageContainer = styled.div`

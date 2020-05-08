@@ -12,9 +12,13 @@ import ProfilePageContainer, { ItemContainer } from './Profile.styles'
 
 const ProfileWithSpinner = withSpinner(ProfilePageContainer)
 
-const ItemComponent = ({ item: { name } }: any) => (
+const ItemComponent = ({ item: { name, bio } }: any) => (
     <ItemContainer>
-        <p>{name}</p>
+        <p className="name">{name}</p>
+        {bio
+            ? <p className="bio">{bio}</p>
+            : <p className="no-bio">No bio</p>
+        }
     </ItemContainer>
 )
 
