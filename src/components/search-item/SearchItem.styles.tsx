@@ -6,6 +6,11 @@ const SearchItemContainer = styled.div`
     margin: 1rem 0;
     display: flex;
 
+    .avatar {
+        width: 48px;
+        margin-right: 1rem;
+    }
+
     .user {
         .name {
             font-weight: bold;

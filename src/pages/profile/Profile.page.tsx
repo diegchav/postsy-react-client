@@ -12,13 +12,16 @@ import ProfilePageContainer, { ItemContainer } from './Profile.styles'
 
 const ProfileWithSpinner = withSpinner(ProfilePageContainer)
 
-const ItemComponent = ({ item: { name, bio } }: any) => (
+const ItemComponent = ({ item: { name, bio, avatar } }: any) => (
     <ItemContainer>
-        <p className="name">{name}</p>
-        {bio
-            ? <p className="bio">{bio}</p>
-            : <p className="no-bio">No bio</p>
-        }
+        <img className="avatar" src={avatar} alt="avatar" />
+        <div className="user">
+            <p className="name">{name}</p>
+            {bio
+                ? <p className="bio">{bio}</p>
+                : <p className="no-bio">No bio</p>
+            }
+        </div>
     </ItemContainer>
 )
 
@@ -40,7 +43,7 @@ const ProfilePage = () => {
                 const { user: { _id } } = await AuthService.getCurrentUser()
                 const _user = await UserService.getUser(_id)
                 const { following, followers } = _user
-                setCurrentUser({ _id: _user._id, name: _user.name, bio: _user.bio })
+                setCurrentUser({ _id: _user._id, name: _user.name, bio: _user.bio, avatar: _user.avatar })
                 setUserFollowing(following)
                 setUserFollowers(followers)
                 setIsLoading(false)

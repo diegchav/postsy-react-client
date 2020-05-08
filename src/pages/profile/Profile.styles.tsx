@@ -6,17 +6,23 @@ export const ItemContainer = styled.div`
     margin: .5rem 0;
     padding: 1rem .5rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
 
-    .bio,
-    .no-bio {
-        font-size: .9rem;
-        margin-top: .5rem;
+    .avatar {
+        width: 48px;
+        margin-right: 1rem;
     }
 
-    .no-bio {
-        font-style: italic;
+    .user {
+        .bio,
+        .no-bio {
+            font-size: .9rem;
+            margin-top: .5rem;
+        }
+
+        .no-bio {
+            font-style: italic;
+        }
     }
 `
 

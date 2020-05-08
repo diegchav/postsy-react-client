@@ -6,17 +6,23 @@ export const ItemContainer = styled.div`
     margin: .5rem 0;
     padding: 1rem .5rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
 
-    .bio,
-    .no-bio {
-        font-size: .9rem;
-        margin-top: .5rem;
+    .avatar {
+        width: 48px;
+        margin-right: 1rem;
     }
 
-    .no-bio {
-        font-style: italic;
+    .user {
+        .bio,
+        .no-bio {
+            font-size: .9rem;
+            margin-top: .5rem;
+        }
+
+        .no-bio {
+            font-style: italic;
+        }
     }
 `
 
@@ -26,19 +32,27 @@ const UserProfilePageContainer = styled.div`
     margin: 0 auto;
     padding: 2.5rem 0;
 
-    .user-details {
+    .info {
         background-color: #fff;
         margin-top: 1rem;
         padding: 1rem .5rem;
+        display: flex;
 
-        .bio,
-        .no-bio {
-            font-size: .95rem;
-            margin-top: .5rem;
+        .avatar {
+            width: 48px;
+            margin-right: 1rem;
         }
 
-        .no-bio {
-            font-style: italic;
+        .user {
+            .bio,
+            .no-bio {
+                font-size: .95rem;
+                margin-top: .5rem;
+            }
+
+            .no-bio {
+                font-style: italic;
+            }
         }
     }
 
@@ -47,6 +61,5 @@ const UserProfilePageContainer = styled.div`
         margin-top: 2rem;
         justify-content: space-between;
     }
-
 `
 export default UserProfilePageContainer

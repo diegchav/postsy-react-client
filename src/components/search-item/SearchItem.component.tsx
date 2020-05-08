@@ -8,9 +8,10 @@ interface UserProps {
     onFollow: Function
 }
 
-const User = ({ user: { _id, name, bio, following }, onFollow }: UserProps) => {
+const User = ({ user: { _id, name, bio, avatar, following }, onFollow }: UserProps) => {
     return (
         <SearchItemContainer>
+            <img className="avatar" src={avatar} alt="avatar" />
             <div className="user">
                 <Link className="name" to={`/profile/${_id}`}>{name}</Link>
                 {bio

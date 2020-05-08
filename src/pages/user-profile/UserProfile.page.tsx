@@ -11,13 +11,16 @@ import UserProfilePageContainer, { ItemContainer } from './UserProfile.styles'
 
 const UserProfileWithSpinner = withSpinner(UserProfilePageContainer)
 
-const ItemComponent = ({ item: { name, bio } }: any) => (
+const ItemComponent = ({ item: { name, bio, avatar } }: any) => (
     <ItemContainer>
-        <p className="name">{name}</p>
-        {bio
-            ? <p className="bio">{bio}</p>
-            : <p className="no-bio">No bio</p>
-        }
+        <img className="avatar" src={avatar} alt="avatar" />
+        <div className="user">
+            <p className="name">{name}</p>
+            {bio
+                ? <p className="bio">{bio}</p>
+                : <p className="no-bio">No bio</p>
+            }
+        </div>
     </ItemContainer>
 )
 
@@ -30,7 +33,8 @@ const NoItemsComponent = () => (
 const UserProfilePage = () => {
     const [user, setUser] = useState({
         name: '',
-        bio: ''
+        bio: '',
+        avatar: ''
     })
     const [userFollowing, setUserFollowing] = useState<string[]>([])
     const [userFollowers, setUserFollowers] = useState<string[]>([])
@@ -42,10 +46,11 @@ const UserProfilePage = () => {
         const getUser = async () => {
             try {
                 const user = await UserService.getUser(userId || '')
-                const { name, bio, following, followers } = user
+                const { name, bio, avatar, following, followers } = user
                 setUser({
                     name,
-                    bio
+                    bio,
+                    avatar
                 })
                 setUserFollowing(following)
                 setUserFollowers(followers)
@@ -62,12 +67,15 @@ const UserProfilePage = () => {
         <UserProfileWithSpinner isLoading={isLoading}>
             <div className="user-information">
                 <h1>User Information</h1>
-                <div className="user-details">
-                    <p className="name">{user.name}</p>
-                    {user.bio
-                        ? <p className="bio">{user.bio}</p>
-                        : <p className="no-bio">No bio</p>
-                    }
+                <div className="info">
+                    <img className="avatar" src={user.avatar} alt="avatar" />
+                    <div className="user">
+                        <p className="name">{user.name}</p>
+                        {user.bio
+                            ? <p className="bio">{user.bio}</p>
+                            : <p className="no-bio">No bio</p>
+                        }
+                    </div>
                 </div>
             </div>
             <div className="following-and-followers">
