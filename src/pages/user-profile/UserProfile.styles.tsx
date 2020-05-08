@@ -27,10 +27,7 @@ export const ItemContainer = styled.div`
 `
 
 const UserProfilePageContainer = styled.div`
-    width: 60%;
-    height: 90%;
-    margin: 0 auto;
-    padding: 2.5rem 0;
+    padding: 1rem;
 
     .info {
         background-color: #fff;

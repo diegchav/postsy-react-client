@@ -3,6 +3,9 @@ import {
   Switch
 } from 'react-router-dom'
 
+import RootContainer from './containers/root/Root.container'
+
+import BasePage from './pages/base-page/Base.page'
 import HomePage from './pages/home/Home.page'
 import SignUpPage from './pages/sign-up/SignUp.page'
 import SignInPage from './pages/sign-in/SignIn.page'
@@ -26,27 +29,31 @@ const App = () => {
   return (
     <AppContainer>
       <ModalMessage message={message} type={type} />
-      <NavBar />
-      <Switch>
-        <PrivateRoute path="/" exact>
-          <HomePage />
-        </PrivateRoute>
-        <PublicRoute path="/signup" exact>
-          <SignUpPage />
-        </PublicRoute>
-        <PublicRoute path="/signin" exact>
-          <SignInPage />
-        </PublicRoute>
-        <PrivateRoute path="/search" exact>
-          <SearchPage />
-        </PrivateRoute>
-        <PrivateRoute path="/profile" exact>
-          <ProfilePage />
-        </PrivateRoute>
-        <PrivateRoute path="/profile/:userId" exact>
-          <UserProfilePage />
-        </PrivateRoute>
-      </Switch>
+      <RootContainer>
+        <NavBar />
+        <BasePage>
+          <Switch>
+            <PrivateRoute path="/" exact>
+              <HomePage />
+            </PrivateRoute>
+            <PublicRoute path="/signup" exact>
+              <SignUpPage />
+            </PublicRoute>
+            <PublicRoute path="/signin" exact>
+              <SignInPage />
+            </PublicRoute>
+            <PrivateRoute path="/search" exact>
+              <SearchPage />
+            </PrivateRoute>
+            <PrivateRoute path="/profile" exact>
+              <ProfilePage />
+            </PrivateRoute>
+            <PrivateRoute path="/profile/:userId" exact>
+              <UserProfilePage />
+            </PrivateRoute>
+          </Switch>
+        </BasePage>
+      </RootContainer>
     </AppContainer>
   )
 }

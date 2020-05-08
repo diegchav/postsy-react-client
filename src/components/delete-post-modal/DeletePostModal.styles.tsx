@@ -12,7 +12,7 @@ const DeletePostModalContainer = styled.div`
     justify-content: center;
 
     .modal-box {
-        width: 50%;
+        width: 40%;
         background-color: #fff;
         margin: 0;
         padding: 1rem 1.5rem;

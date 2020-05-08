@@ -5,5 +5,5 @@ export default styled.div`
     height: 100vh;
     background-color: #f7f7f7;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 `

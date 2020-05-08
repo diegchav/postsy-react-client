@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const CreatePostButtonContainer = styled.button`
-    width: 80%;
     background-color: #2980b9;
     color: #fff;
     border: none;
