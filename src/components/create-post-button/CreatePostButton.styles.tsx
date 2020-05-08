@@ -6,7 +6,7 @@ const CreatePostButtonContainer = styled.button`
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 1rem 0;
+    padding: .75rem 0;
     cursor: pointer;
     font-size: 1.1rem;
 `
