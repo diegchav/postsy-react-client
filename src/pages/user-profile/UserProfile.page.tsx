@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import List from '../../components/list/List.component'
+import UserPostItem from '../../components/user-post-item/UserPostItem.component'
 
 import withSpinner from '../../hoc/with-spinner'
 
@@ -38,6 +39,7 @@ const UserProfilePage = () => {
     })
     const [userFollowing, setUserFollowing] = useState<string[]>([])
     const [userFollowers, setUserFollowers] = useState<string[]>([])
+    const [posts, setPosts] = useState<any[]>([])
     const [isLoading, setIsLoading] = useState(true)
 
     const { userId } = useParams()
@@ -47,6 +49,7 @@ const UserProfilePage = () => {
             try {
                 const user = await UserService.getUser(userId || '')
                 const { name, bio, avatar, following, followers } = user
+                const _posts = await UserService.getPostsForUser(userId || '')
                 setUser({
                     name,
                     bio,
@@ -54,6 +57,7 @@ const UserProfilePage = () => {
                 })
                 setUserFollowing(following)
                 setUserFollowers(followers)
+                setPosts(_posts)
                 setIsLoading(false)
             } catch (err) {
                 console.error(err)
@@ -81,7 +85,6 @@ const UserProfilePage = () => {
             <div className="following-and-followers">
                 <List
                     width="48%"
-                    height="90%"
                     title="Following"
                     items={userFollowing}
                     itemKey="_id"
@@ -89,12 +92,19 @@ const UserProfilePage = () => {
                     NoItemsComponent={NoItemsComponent} />
                 <List
                     width="48%"
-                    height="90%"
                     title="Followers"
                     items={userFollowers}
                     itemKey="_id"
                     ItemComponent={ItemComponent}
                     NoItemsComponent={NoItemsComponent} />
+            </div>
+            <div className="post-list">
+                <List
+                    width="100%"
+                    title="Posts"
+                    items={posts}
+                    itemKey="_id"
+                    ItemComponent={UserPostItem} />
             </div>
         </UserProfileWithSpinner>
     )

@@ -34,6 +34,10 @@ const ProfilePageContainer = styled.div`
         margin-top: 2.5rem;
         justify-content: space-between;
     }
+
+    .post-list {
+        margin-top: 2rem;
+    }
 `
 
 export default ProfilePageContainer
