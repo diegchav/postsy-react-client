@@ -36,7 +36,7 @@ const PostContainer = styled.div`
     }
 
     .post-image {
-        max-width: 700px;
+        max-width: 100%;
         margin: 1rem auto;
     }
 
