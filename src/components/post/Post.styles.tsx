@@ -37,7 +37,7 @@ const PostContainer = styled.div`
 
     .post-image {
         max-width: 100%;
-        margin: 1rem auto;
+        margin: 1rem auto 0;
     }
 
     button {
@@ -48,6 +48,7 @@ const PostContainer = styled.div`
         border-radius: 5px;
         padding: .25rem 0;
         cursor: pointer;
+        font-size: 1rem;
     }
 `
 
