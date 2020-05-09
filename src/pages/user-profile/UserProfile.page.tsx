@@ -68,45 +68,47 @@ const UserProfilePage = () => {
     }, [userId])
 
     return (
-        <UserProfileWithSpinner isLoading={isLoading}>
-            <div className="user-information">
-                <h1>User Information</h1>
-                <div className="info">
-                    <img className="avatar" src={user.avatar} alt="avatar" />
-                    <div className="user">
-                        <p className="name">{user.name}</p>
-                        {user.bio
-                            ? <p className="bio">{user.bio}</p>
-                            : <p className="no-bio">No bio</p>
-                        }
+        <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <UserProfileWithSpinner isLoading={isLoading}>
+                <div className="user-information">
+                    <h1>User Information</h1>
+                    <div className="info">
+                        <img className="avatar" src={user.avatar} alt="avatar" />
+                        <div className="user">
+                            <p className="name">{user.name}</p>
+                            {user.bio
+                                ? <p className="bio">{user.bio}</p>
+                                : <p className="no-bio">No bio</p>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="following-and-followers">
-                <List
-                    width="48%"
-                    title="Following"
-                    items={userFollowing}
-                    itemKey="_id"
-                    ItemComponent={ItemComponent}
-                    NoItemsComponent={NoItemsComponent} />
-                <List
-                    width="48%"
-                    title="Followers"
-                    items={userFollowers}
-                    itemKey="_id"
-                    ItemComponent={ItemComponent}
-                    NoItemsComponent={NoItemsComponent} />
-            </div>
-            <div className="post-list">
-                <List
-                    width="100%"
-                    title="Posts"
-                    items={posts}
-                    itemKey="_id"
-                    ItemComponent={UserPostItem} />
-            </div>
-        </UserProfileWithSpinner>
+                <div className="following-and-followers">
+                    <List
+                        width="48%"
+                        title="Following"
+                        items={userFollowing}
+                        itemKey="_id"
+                        ItemComponent={ItemComponent}
+                        NoItemsComponent={NoItemsComponent} />
+                    <List
+                        width="48%"
+                        title="Followers"
+                        items={userFollowers}
+                        itemKey="_id"
+                        ItemComponent={ItemComponent}
+                        NoItemsComponent={NoItemsComponent} />
+                </div>
+                <div className="post-list">
+                    <List
+                        width="100%"
+                        title="Posts"
+                        items={posts}
+                        itemKey="_id"
+                        ItemComponent={UserPostItem} />
+                </div>
+            </UserProfileWithSpinner>
+        </div>
     )
 }
 

@@ -92,34 +92,36 @@ const ProfilePage = () => {
                 onClose={handleCloseDeletePostModal}
                 onDelete={handleDeletePost} />
         }
-        <ProfileWithSpinner isLoading={isLoading}>
-            <AccountSettings user={currentUser} />
-            <div className="following-and-followers">
-                <List
-                    width="48%"
-                    title="Following"
-                    items={userFollowing}
-                    itemKey="_id"
-                    ItemComponent={ItemComponent}
-                    NoItemsComponent={NoItemsComponent} />
-                <List
-                    width="48%"
-                    title="Followers"
-                    items={userFollowers}
-                    itemKey="_id"
-                    ItemComponent={ItemComponent}
-                    NoItemsComponent={NoItemsComponent} />
-            </div>
-            <div className="post-list">
-                <List
-                    width="100%"
-                    title="Posts"
-                    items={posts}
-                    itemKey="_id"
-                    ItemComponent={PostItem}
-                    onDelete={handleOpenDeletePostModal} />
-            </div>
-        </ProfileWithSpinner>
+        <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <ProfileWithSpinner isLoading={isLoading}>
+                <AccountSettings user={currentUser} />
+                <div className="following-and-followers">
+                    <List
+                        width="48%"
+                        title="Following"
+                        items={userFollowing}
+                        itemKey="_id"
+                        ItemComponent={ItemComponent}
+                        NoItemsComponent={NoItemsComponent} />
+                    <List
+                        width="48%"
+                        title="Followers"
+                        items={userFollowers}
+                        itemKey="_id"
+                        ItemComponent={ItemComponent}
+                        NoItemsComponent={NoItemsComponent} />
+                </div>
+                <div className="post-list">
+                    <List
+                        width="100%"
+                        title="Posts"
+                        items={posts}
+                        itemKey="_id"
+                        ItemComponent={PostItem}
+                        onDelete={handleOpenDeletePostModal} />
+                </div>
+            </ProfileWithSpinner>
+        </div>
         </>
     )
 }

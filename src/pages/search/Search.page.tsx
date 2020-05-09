@@ -6,6 +6,8 @@ import withSpinner from '../../hoc/with-spinner'
 
 import UserService from '../../services/user.service'
 
+import SearchContainer from './Search.styles'
+
 const SearchListWithSpinner = withSpinner(SearchList)
 
 const SearchPage = () => {
@@ -62,13 +64,13 @@ const SearchPage = () => {
     }
 
     return (
-        <div>
+        <SearchContainer>
             <SearchListWithSpinner
                 isLoading={isLoadingUsers}
                 users={users}
                 onFollowUser={handleFollowUser}
                 onUnfollowUser={handleUnfollowUser} />
-        </div>
+        </SearchContainer>
     )
 }
 
