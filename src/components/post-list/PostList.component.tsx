@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-import Post from '../post/Post.component'
+import PostItem from '../post-item/PostItem.component'
 
 import PostListContainer from './PostList.styles'
 
@@ -19,7 +19,7 @@ const PostList = ({ posts, onDeletePost }: PostListProps) => {
 
     return (
         <PostListContainer ref={refContainer}>
-            {posts.map((post: any) => <Post key={post._id} post={post} onDelete={onDeletePost} />)}
+            {posts.map((post: any) => <PostItem key={post._id} item={post} onDelete={onDeletePost} />)}
         </PostListContainer>
     )
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const PostContainer = styled.div`
+const PostItemContainer = styled.div`
     background-color: #fff;
     padding: 1rem;
     margin: 1rem 0;
@@ -52,4 +52,4 @@ const PostContainer = styled.div`
     }
 `
 
-export default PostContainer
+export default PostItemContainer

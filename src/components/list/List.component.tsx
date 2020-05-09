@@ -10,18 +10,28 @@ interface ListProps {
     items: any[],
     itemKey: string,
     ItemComponent: any,
-    NoItemsComponent: any
+    NoItemsComponent?: any,
+    [p: string]: any  // Any other prop that we need to pass to ItemComponent
 }
 
-const List = ({ width, height, title, titleSize, items, itemKey, ItemComponent, NoItemsComponent }: ListProps) => (
+const List = ({ width, height, title, titleSize, items, itemKey, ItemComponent, NoItemsComponent, ...otherProps }: ListProps) => (
     <ListContainer width={width} height={height} titleSize={titleSize}>
-        {title && <h1>{title}</h1>}
-        <div className="list-content">
-            {items.length > 0
-                ? items.map((item) => <ItemComponent key={item[itemKey]} item={item} />)
-                : <NoItemsComponent />
-            }
-        </div>
+        {NoItemsComponent
+            ? (
+                <>
+                {title && <h1>{title}</h1>}
+                <NoItemsComponent />
+                </>
+            )
+            : (
+                <>
+                {(title && items.length > 0) && <h1>{title}</h1>}
+                <div className="list-content">
+                    {items.map((item) => <ItemComponent key={item[itemKey]} item={item} {...otherProps} />)}
+                </div>
+                </>
+            )
+        }
     </ListContainer>
 )
 
