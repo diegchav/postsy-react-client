@@ -10,6 +10,7 @@ const CreatePostModalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 
     .modal-box {
         width: 40%;
