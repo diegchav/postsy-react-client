@@ -3,6 +3,7 @@ export const API_URL = 'http://localhost:1337/api'
 export const API_AUTH_PATH = '/auth'
 export const API_POSTS_PATH = '/posts'
 export const API_USERS_PATH = '/users'
+export const API_FEEDS_PATH = '/feeds'
 
 // HTTP status codes
 export const HTTP_OK = 200
