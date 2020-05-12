@@ -5,13 +5,14 @@ import {
 
 import RootContainer from './containers/root/Root.container'
 
-import BasePage from './pages/base-page/Base.page'
+import BasePage from './pages/base/Base.page'
 import HomePage from './pages/home/Home.page'
 import SignUpPage from './pages/sign-up/SignUp.page'
 import SignInPage from './pages/sign-in/SignIn.page'
 import SearchPage from './pages/search/Search.page'
 import ProfilePage from './pages/profile/Profile.page'
 import UserProfilePage from './pages/user-profile/UserProfile.page'
+import PostPage from './pages/post/Post.page'
 
 import NavBar from './components/nav-bar/NavBar.component'
 import ModalMessage from './components/modal-message/ModalMessage.component'
@@ -50,6 +51,9 @@ const App = () => {
             </PrivateRoute>
             <PrivateRoute path="/profile/:userId" exact>
               <UserProfilePage />
+            </PrivateRoute>
+            <PrivateRoute path="/post/:id" exact>
+              <PostPage />
             </PrivateRoute>
           </Switch>
         </BasePage>

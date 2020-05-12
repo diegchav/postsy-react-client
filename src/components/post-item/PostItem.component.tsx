@@ -1,5 +1,7 @@
 import React from 'react'
 
+import getImageNameFromUrl from '../../helpers/get-image-name-from-url.helper'
+
 import PostItemContainer from './PostItem.styles'
 
 interface PostItemProps {
@@ -8,8 +10,7 @@ interface PostItemProps {
 }
 
 const PostItem = ({ item, onDelete }: PostItemProps) => {
-    const imageNameIndex = item.imageUrl.split('/') + 1
-    const imageName = item.imageUrl.substr(imageNameIndex)
+    const imageName = getImageNameFromUrl(item.imageUrl)
 
     const handleDelete = () => {
         const { _id } = item

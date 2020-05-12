@@ -39,6 +39,15 @@ const FeedPostItemContainer = styled.div`
         max-width: 100%;
         margin: 1rem auto 0;
     }
+
+    .actions {
+        display: flex;
+        margin-top: 1rem;
+
+        button {
+            padding: 0;
+        }
+    }
 `
 
 export default FeedPostItemContainer

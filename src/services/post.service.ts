@@ -14,6 +14,12 @@ export default class PostService {
             .then(res => res.posts)
     }
 
+    static geyById = (id: string) => {
+        return axios.get(`${PostService.postsUrl}/${id}`, { headers: authHeader() })
+            .then(handleResponse)
+            .then(res => res.post)
+    }
+
     static create = (text: string, imageFile?: File) => {
         const data = new FormData()
         data.append('text', text)
@@ -24,5 +30,17 @@ export default class PostService {
 
     static delete = (id: string) => {
         return axios.delete(`${PostService.postsUrl}/${id}`, { headers: authHeader() })
+    }
+
+    static commentPost = (id: string, commentText: string) => {
+        const payload = { text: commentText }
+        return axios.post(`${PostService.postsUrl}/${id}/comment`, payload, { headers: authHeader() })
+            .then(handleResponse)
+    }
+
+    static getCommentsForPost = (id: string) => {
+        return axios.get(`${PostService.postsUrl}/${id}/comments`, { headers: authHeader() })
+            .then(handleResponse)
+            .then(res => res.comments)
     }
 }

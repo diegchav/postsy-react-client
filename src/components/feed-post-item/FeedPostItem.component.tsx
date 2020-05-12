@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import IconButton from '@material-ui/core/IconButton'
+import CommentIcon from '@material-ui/icons/CommentSharp'
 
 import FeedPostItemContainer from './FeedPostItem.styles'
 
@@ -21,6 +24,13 @@ const FeedPostItem = ({ item: { post, postOwner } }: FeedPostItemProps) => {
             </div>
             <p className="post-text">{post.text}</p>
             {imageName && <img className="post-image" src={post.imageUrl} alt={imageName} />}
+            <div className="actions">
+                <Link to={`/post/${post._id}`}>
+                    <IconButton>
+                        <CommentIcon />
+                    </IconButton>
+                </Link>
+            </div>
         </FeedPostItemContainer>
     )
 }

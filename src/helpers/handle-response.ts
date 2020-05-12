@@ -7,12 +7,15 @@ import {
     HTTP_OK,
     HTTP_UNAUTHORIZED,
     AUTHENTICATION_ERROR,
-    VALIDATION_ERROR
+    VALIDATION_ERROR,
+    HTTP_CREATED
 } from '../constants'
 
 export default (response: AxiosResponse) => {
     const resData = response.data
     if (resData.status === HTTP_OK) {
+        return resData
+    } else if (resData.status === HTTP_CREATED) {
         return resData
     } else if (resData.status === HTTP_BAD_REQUEST) {
         const { message } = resData

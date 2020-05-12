@@ -1,5 +1,7 @@
 import React from 'react'
 
+import getImageNameFromUrl from '../../helpers/get-image-name-from-url.helper'
+
 import UserPostItemContainer from './UserPostItem.styles'
 
 interface UserPostItemProps {
@@ -7,8 +9,7 @@ interface UserPostItemProps {
 }
 
 const UserPostItem = ({ item }: UserPostItemProps) => {
-    const imageNameIndex = item.imageUrl.split('/') + 1
-    const imageName = item.imageUrl.substr(imageNameIndex)
+    const imageName = getImageNameFromUrl(item.imageUrl)
 
     return (
         <UserPostItemContainer>
