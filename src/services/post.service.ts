@@ -43,4 +43,12 @@ export default class PostService {
             .then(handleResponse)
             .then(res => res.comments)
     }
+
+    static like = (id: string) => {
+        return axios.put(`${PostService.postsUrl}/${id}/like`, null, { headers: authHeader() })
+    }
+
+    static dislike = (id: string) => {
+        return axios.put(`${PostService.postsUrl}/${id}/dislike`, null, { headers: authHeader() })
+    }
 }

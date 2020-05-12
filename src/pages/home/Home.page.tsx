@@ -51,6 +51,22 @@ const HomePage = () => {
         }
     }
 
+    const handleLikePost = async (postId: string) => {
+        try {
+            await PostService.like(postId)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const handleDislikePost = async (postId: string) => {
+        try {
+            await PostService.dislike(postId)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <>
         {
@@ -66,7 +82,9 @@ const HomePage = () => {
                 width="100%"
                 items={feeds}
                 itemKey="_id"
-                ItemComponent={FeedPostItem} />
+                ItemComponent={FeedPostItem}
+                onLike={handleLikePost}
+                onDislike={handleDislikePost} />
         </HomePageContainer>
         </>
     )

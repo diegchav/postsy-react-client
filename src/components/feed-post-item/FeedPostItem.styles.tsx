@@ -44,6 +44,10 @@ const FeedPostItemContainer = styled.div`
         display: flex;
         margin-top: 1rem;
 
+        > * {
+            margin: 0 .25rem;
+        }
+
         button {
             padding: 0;
         }
