@@ -51,6 +51,26 @@ const FeedPostItemContainer = styled.div`
         button {
             padding: 0;
         }
+
+        .liked {
+            animation: grow .25s ease;
+        }
+
+        .disliked {
+            animation: shrink .25s ease;
+        }
+    }
+
+    @keyframes grow {
+        100% {
+            transform: scale(1.5)
+        }
+    }
+
+    @keyframes shrink {
+        100% {
+            transform: scale(.75)
+        }
     }
 `
 
