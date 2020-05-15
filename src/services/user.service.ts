@@ -33,12 +33,12 @@ class UserService {
     }
 
     static follow = (userId: string) => {
-        return axios.post(`${UserService.usersUrl}/follow/${userId}`, null, { headers: authHeader() })
+        return axios.put(`${UserService.usersUrl}/follow/${userId}`, null, { headers: authHeader() })
             .then(handleResponse)
     }
 
     static unfollow = (userId: string) => {
-        return axios.post(`${UserService.usersUrl}/unfollow/${userId}`, null, { headers: authHeader() })
+        return axios.put(`${UserService.usersUrl}/unfollow/${userId}`, null, { headers: authHeader() })
             .then(handleResponse)
     }
 }
