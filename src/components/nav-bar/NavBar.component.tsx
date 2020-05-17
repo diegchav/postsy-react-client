@@ -12,6 +12,11 @@ import {
 
 const Header = () => {
     const currentUser = AuthService.getCurrentUser()
+
+    const handleLogOut = (e: React.MouseEvent<HTMLDivElement>) => {
+        AuthService.logOut()
+    }
+
     return (
         <NavBarContainer>
             <NavLogoContainer to="/">Home</NavLogoContainer>
@@ -26,7 +31,7 @@ const Header = () => {
             }
             <NavItemsContainer>
                 {currentUser
-                    ? <NavItemContainer>Sign Out</NavItemContainer>
+                    ? <NavItemContainer onClick={handleLogOut}>Sign Out</NavItemContainer>
                     : <NavLinkContainer to="/signin">Sign In</NavLinkContainer>
                 }
             </NavItemsContainer>

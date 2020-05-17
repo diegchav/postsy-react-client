@@ -23,6 +23,7 @@ export default class AuthService {
 
     static logOut = () => {
         localStorage.removeItem('user')
+        window.location.reload()
     }
 
     static getCurrentUser = () => {
