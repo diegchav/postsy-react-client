@@ -1,30 +1,39 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import isEmail from 'validator/lib/isEmail'
 
 import FormInput from '../form-input/FormInput.component'
 
-import { FlashMessageType, FlashMessageContext } from '../../providers/FlashMessage.provider'
-
-import AuthService from '../../services/auth.service'
+import { setValidationErrors, signUpStart } from '../../redux/auth/auth.actions'
+import { selectSigningUp, selectValidationErrors } from '../../redux/auth/auth.selectors'
+import { AppState } from '../../redux/root-reducer'
 
 import SignUpFormContainer from './SignUpForm.styles'
 
-const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
+interface ValidationErrors {
+    name?: string,
+    email?: string,
+    password?: string
+}
+
+interface SignUpFormProps {
+    isSigningUp: boolean,
+    errors: ValidationErrors,
+    setValidationErrors: Function,
+    signUpStart: Function
+}
+
+const SignUpForm: React.FC<RouteComponentProps & SignUpFormProps> = (
+    { isSigningUp, errors, setValidationErrors, signUpStart }
+) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [errors, setErrors] = useState<{ [key: string]: string }>({
-        name: '',
-        email: '',
-        password: ''
-    })
-    const [isSigningUp, setIsSigningUp] = useState(false)
-
-    const { changeFlashMessage } = useContext(FlashMessageContext)
 
     const validate = () => {
-        const validationErrors: typeof errors = {}
+        const validationErrors: ValidationErrors = {}
 
         if (!name) validationErrors['name'] = 'Name is required'
         else if (name.length > 120) validationErrors['name'] = 'Name must be at most 120 characters'
@@ -44,24 +53,9 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
         const validationErrors = validate()
         const hasErrors = Object.keys(validationErrors).length !== 0
         if (hasErrors) {
-            setErrors(validationErrors)
+            setValidationErrors(validationErrors)
         } else {
-            setIsSigningUp(true)
-            signUp(name.trim(), email.trim().toLowerCase(), password.trim())
-        }
-    }
-
-    const signUp = async (name: string, email: string, password: string) => {
-        try {
-            await AuthService.signUp(name, email, password)
-            changeFlashMessage('Successfully signed up', FlashMessageType.Success)
-            history.push('/signin')
-        } catch (err) {
-            const { errors } = err
-            if (errors) {
-                setErrors(errors)
-                setIsSigningUp(false)
-            }
+            signUpStart(name.trim(), email.trim().toLowerCase(), password.trim())
         }
     }
 
@@ -98,4 +92,14 @@ const SignUpForm: React.FC<RouteComponentProps> = ({ history }) => {
     )
 }
 
-export default withRouter(SignUpForm)
+const mapStateToProps = (state: AppState) => ({
+    isSigningUp: selectSigningUp(state),
+    errors: selectValidationErrors(state)
+})
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    setValidationErrors: (errors: ValidationErrors) => dispatch(setValidationErrors(errors)),
+    signUpStart: (name: string, email: string, password: string) => dispatch(signUpStart(name, email, password))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignUpForm))

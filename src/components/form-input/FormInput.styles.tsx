@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface FormInputContainerProps {
-    error: string
+    error?: string
 }
 
 const FormInputContainer = styled.div<FormInputContainerProps>`

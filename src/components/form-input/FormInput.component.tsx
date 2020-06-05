@@ -3,7 +3,7 @@ import React from 'react'
 import FormInputContainer from './FormInput.styles'
 
 interface FormInputProps extends React.HTMLProps<HTMLInputElement> {
-    error: string
+    error?: string
 }
 
 const FormInput = ({ error, ...otherProps }: FormInputProps) => {
