@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react'
 import {
   Switch
 } from 'react-router-dom'
@@ -62,4 +62,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
