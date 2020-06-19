@@ -1,69 +1,35 @@
 import React, { useState, useContext } from 'react'
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom'
-import isEmail from 'validator/lib/isEmail'
 
 import FormInput from '../form-input/FormInput.component'
+
+import { ValidationErrors } from '../../redux/auth/auth.reducer'
 
 import AuthService from '../../services/auth.service'
 
 import { FlashMessageType, FlashMessageContext } from '../../providers/FlashMessage.provider'
 
+import { validateSignIn } from '../../validators'
+
 import SignInFormContainer from './SignInForm.styles'
 
-const SignInForm: React.FC<RouteComponentProps> = ({ history }) => {
-    const [state, setState] = useState({
-        email: '',
-        password: '',
-        errors: {
-            email: '',
-            password: ''
-        },
-        isSigningIn: false
-    })
-
-    const {
-        email,
-        password,
-        errors,
-        isSigningIn
-    } = state
+const SignInForm = ({ history }: RouteComponentProps) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState<ValidationErrors>({ email: '', password: '' })
+    const [isSigningIn, setIsSigningIn] = useState(false)
 
     const { changeFlashMessage } = useContext(FlashMessageContext)
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-        setState({
-            ...state,
-            [name]: value
-        })
-    
-    }
-    const validate = () => {
-        const validationErrors = {
-            email: '',
-            password: ''
-        }
-        
-        if (!email) validationErrors['email'] = 'Email is required'
-        else if (!isEmail(email)) validationErrors['email'] = 'Email is not valid'
-
-        if (!password) validationErrors['password'] = 'Password is required'
-
-        return validationErrors
-    }
 
     const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const validationErrors = validate()
+        const validationErrors = validateSignIn(email, password)
         const areErrors = Object.values(validationErrors).some(elem => elem !== '')
         if (areErrors) {
-            setState({
-                ...state,
-                errors: validationErrors
-            })
+            setErrors(validationErrors)
         } else {
-            setState({ ...state, isSigningIn: true })
+            setIsSigningIn(true)
             signIn(
                 email.trim().toLowerCase(),
                 password.trim())
@@ -77,50 +43,41 @@ const SignInForm: React.FC<RouteComponentProps> = ({ history }) => {
         } catch (err) {
             if (err.errors) {
                 const { errors } = err
-                setState({
-                    ...state,
-                    errors,
-                    isSigningIn: false
-                })
+                setErrors(errors)
+                setIsSigningIn(false)
             } else if (err.error) {
                 changeFlashMessage(err.error, FlashMessageType.Error)
-                setState({
-                    ...state,
-                    email: '',
-                    password: '',
-                    errors: {
-                        email: '',
-                        password: ''
-                    },
-                    isSigningIn: false
-                })
+                setEmail('')
+                setPassword('')
+                setErrors({ email: '', password: '' })
+                setIsSigningIn(false)
             }
         }
     }
 
     return (
         <SignInFormContainer>
-        <h1 className="title">Sign In</h1>
-        <form onSubmit={handleSubmit}>
-            <FormInput
-                type="text"
-                name="email"
-                placeholder="Email"
-                autoFocus
-                value={email}
-                error={errors.email}
-                onChange={handleChange} />
-            <FormInput
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                error={errors.password}
-                onChange={handleChange} />
-            <button type="submit" disabled={isSigningIn}>Sign In</button>
-        </form>
-        <span className="link">Don't have an account? <Link to="/signup">Sign up</Link></span>
-    </SignInFormContainer>
+            <h1 className="title">Sign In</h1>
+            <form onSubmit={handleSubmit}>
+                <FormInput
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    autoFocus
+                    value={email}
+                    error={errors.email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                <FormInput
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    error={errors.password}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
+                <button type="submit" disabled={isSigningIn}>Sign In</button>
+            </form>
+            <p className="link">Don't have an account? <Link to="/signup">Sign up</Link></p>
+        </SignInFormContainer>
     )
 }
 

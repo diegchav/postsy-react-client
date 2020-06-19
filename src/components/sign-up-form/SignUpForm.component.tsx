@@ -2,21 +2,17 @@ import React, { useState } from 'react'
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import isEmail from 'validator/lib/isEmail'
 
 import FormInput from '../form-input/FormInput.component'
 
 import { setValidationErrors, signUpStart } from '../../redux/auth/auth.actions'
+import { ValidationErrors } from '../../redux/auth/auth.reducer'
 import { selectSigningUp, selectValidationErrors } from '../../redux/auth/auth.selectors'
 import { AppState } from '../../redux/root-reducer'
 
-import SignUpFormContainer from './SignUpForm.styles'
+import { validateSignUp } from '../../validators'
 
-interface ValidationErrors {
-    name?: string,
-    email?: string,
-    password?: string
-}
+import SignUpFormContainer from './SignUpForm.styles'
 
 interface SignUpFormProps {
     isSigningUp: boolean,
@@ -32,25 +28,10 @@ const SignUpForm: React.FC<RouteComponentProps & SignUpFormProps> = (
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const validate = () => {
-        const validationErrors: ValidationErrors = {}
-
-        if (!name) validationErrors['name'] = 'Name is required'
-        else if (name.length > 120) validationErrors['name'] = 'Name must be at most 120 characters'
-
-        if (!email) validationErrors['email'] = 'Email is required'
-        else if (!isEmail(email)) validationErrors['email'] = 'Email is not valid'
-
-        if (!password) validationErrors['password'] = 'Password is required'
-        else if (password.length < 8) validationErrors['password'] = 'Password must be at least 8 characters'
-
-        return validationErrors
-    }
-
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const validationErrors = validate()
+        const validationErrors = validateSignUp(name, email, password)
         const hasErrors = Object.keys(validationErrors).length !== 0
         if (hasErrors) {
             setValidationErrors(validationErrors)
