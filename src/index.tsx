@@ -12,11 +12,11 @@ import './index.css';
 
 import FlashMessageProvider from './providers/FlashMessage.provider'
 
-// Configure axios defaults
+// Configure axios to treat non 2xx status codes as valid responses
 axios.defaults.validateStatus = (status) => status >= 200 && status < 500
 
 ReactDOM.render(
-  <Provider store={store as any}>
+  <Provider store={store}>
     <FlashMessageProvider>
       <React.StrictMode>
         <Router>
