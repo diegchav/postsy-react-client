@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { connect } from 'react-redux'
 
 import FormInput from '../form-input/FormInput.component'
 
-import { setValidationErrors, signUpStart } from '../../redux/auth/auth.actions'
-import { ValidationErrors } from '../../redux/auth/auth.reducer'
+import { signUpStart, setValidationErrors } from '../../redux/auth/auth.actions'
 import { selectSigningUp, selectValidationErrors } from '../../redux/auth/auth.selectors'
+import { ValidationErrors } from '../../redux/auth/auth.reducer'
 import { AppState } from '../../redux/root-reducer'
 
 import { validateSignUp } from '../../validators'
@@ -16,13 +16,13 @@ import SignUpFormContainer from './SignUpForm.styles'
 
 interface SignUpFormProps {
     isSigningUp: boolean,
+    signUpStart: Function,
     errors: ValidationErrors,
-    setValidationErrors: Function,
-    signUpStart: Function
+    setValidationErrors: Function
 }
 
 const SignUpForm: React.FC<RouteComponentProps & SignUpFormProps> = (
-    { isSigningUp, errors, setValidationErrors, signUpStart }
+    { isSigningUp, signUpStart, errors, setValidationErrors }
 ) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -79,8 +79,8 @@ const mapStateToProps = (state: AppState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+    signUpStart: (name: string, email: string, password: string) => dispatch(signUpStart({ name, email, password })),
     setValidationErrors: (errors: ValidationErrors) => dispatch(setValidationErrors(errors)),
-    signUpStart: (name: string, email: string, password: string) => dispatch(signUpStart(name, email, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignUpForm))

@@ -1,17 +1,31 @@
 import React from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import AuthService from '../services/auth.service'
 
-const PrivateRoute = (props: RouteProps) => {
-    const currentUser = AuthService.getCurrentUser()
-    if (!currentUser) {
-        return <Redirect to="/signin" />
-    }
+import { User } from '../redux/auth/auth.reducer'
+import { selectCurrentUser } from '../redux/auth/auth.selectors'
+import { AppState } from '../redux/root-reducer'
 
-    return (
-        <Route {...props} />
-    )
+interface PrivateRouteProps {
+    currentUser: User | null
 }
 
-export default PrivateRoute
+const PrivateRoute = ({ currentUser, children, ...rest }: React.PropsWithChildren<PrivateRouteProps & RouteProps>) => {
+    return <Route
+        {...rest}
+        render={() =>
+            currentUser ? (
+                children
+            ) : (
+                <Redirect to="/signin" />
+            )
+        }
+    />
+}
+
+const mapStateToProps = (state: AppState) => ({
+    currentUser: selectCurrentUser(state)
+})
+
+export default connect(mapStateToProps)(PrivateRoute)

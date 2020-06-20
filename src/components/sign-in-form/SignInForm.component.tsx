@@ -1,25 +1,31 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom'
+import { Dispatch } from 'redux'
+import { connect } from 'react-redux'
 
 import FormInput from '../form-input/FormInput.component'
 
+import { signInStart, setValidationErrors } from '../../redux/auth/auth.actions'
+import { selectSigningIn, selectValidationErrors } from '../../redux/auth/auth.selectors'
 import { ValidationErrors } from '../../redux/auth/auth.reducer'
-
-import AuthService from '../../services/auth.service'
-
-import { FlashMessageType, FlashMessageContext } from '../../providers/FlashMessage.provider'
+import { AppState } from '../../redux/root-reducer'
 
 import { validateSignIn } from '../../validators'
 
 import SignInFormContainer from './SignInForm.styles'
 
-const SignInForm = ({ history }: RouteComponentProps) => {
+interface SignInFormProps {
+    isSigningIn: boolean,
+    signInStart: Function,
+    errors: ValidationErrors,
+    setValidationErrors: Function
+}
+
+const SignInForm: React.FC<RouteComponentProps & SignInFormProps> = (
+    { isSigningIn, signInStart, errors, setValidationErrors, history }
+) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [errors, setErrors] = useState<ValidationErrors>({ email: '', password: '' })
-    const [isSigningIn, setIsSigningIn] = useState(false)
-
-    const { changeFlashMessage } = useContext(FlashMessageContext)
 
     const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -27,31 +33,9 @@ const SignInForm = ({ history }: RouteComponentProps) => {
         const validationErrors = validateSignIn(email, password)
         const areErrors = Object.values(validationErrors).some(elem => elem !== '')
         if (areErrors) {
-            setErrors(validationErrors)
+            setValidationErrors(validationErrors)
         } else {
-            setIsSigningIn(true)
-            signIn(
-                email.trim().toLowerCase(),
-                password.trim())
-        }
-    }
-
-    const signIn = async (email: string, password: string) => {
-        try {
-            await AuthService.signIn(email, password)
-            history.push('/')
-        } catch (err) {
-            if (err.errors) {
-                const { errors } = err
-                setErrors(errors)
-                setIsSigningIn(false)
-            } else if (err.error) {
-                changeFlashMessage(err.error, FlashMessageType.Error)
-                setEmail('')
-                setPassword('')
-                setErrors({ email: '', password: '' })
-                setIsSigningIn(false)
-            }
+            signInStart(email.trim().toLowerCase(), password.trim())
         }
     }
 
@@ -81,4 +65,14 @@ const SignInForm = ({ history }: RouteComponentProps) => {
     )
 }
 
-export default withRouter(SignInForm)
+const mapStateToProps = (state: AppState) => ({
+    isSigningIn: selectSigningIn(state),
+    errors: selectValidationErrors(state)
+})
+
+const mapDispatchProps = (dispatch: Dispatch) => ({
+    signInStart: (email: string, password: string) => dispatch(signInStart({ email, password })),
+    setValidationErrors: (errors: ValidationErrors) => dispatch(setValidationErrors(errors))
+})
+
+export default connect(mapStateToProps, mapDispatchProps)(withRouter(SignInForm))

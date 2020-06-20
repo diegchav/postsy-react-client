@@ -18,6 +18,7 @@ export default class AuthService {
             .then(handleResponse)
             .then(res => {
                 localStorage.setItem('user', JSON.stringify(res))
+                return res
             })
     }
 
