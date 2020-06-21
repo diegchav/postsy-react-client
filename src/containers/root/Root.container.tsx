@@ -1,11 +1,10 @@
-import React from 'react'
+import styled from 'styled-components'
 
-import RootStyledContainer from './Root.styles'
+const RootStyledContainer = styled.div`
+    width: 40%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+`
 
-const RootContainer: React.FunctionComponent = ({ children }) => (
-    <RootStyledContainer>
-        {children}
-    </RootStyledContainer>
-)
-
-export default RootContainer
+export default RootStyledContainer
