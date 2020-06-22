@@ -8,15 +8,16 @@ import App from './App';
 
 import store from './redux/store'
 
-import './index.css';
-
 import FlashMessageProvider from './providers/FlashMessage.provider'
+
+import GlobalStyle from './GlobalStyle'
 
 // Configure axios to treat non 2xx status codes as valid responses
 axios.defaults.validateStatus = (status) => status >= 200 && status < 500
 
 ReactDOM.render(
   <Provider store={store}>
+    <GlobalStyle />
     <FlashMessageProvider>
       <React.StrictMode>
         <Router>
